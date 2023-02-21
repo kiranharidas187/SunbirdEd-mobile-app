@@ -137,6 +137,10 @@ const routes: Routes = [
   {
     path: RouterLinks.OTP,
     loadChildren: './signup/otp/otp.module#OtpPageModule'
+  },
+  {
+    path: RouterLinks.MENTORING,
+    loadChildren: './mentoring/mentoring.module#MentoringModule'
   }
 
 ];
