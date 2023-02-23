@@ -16,6 +16,12 @@ export class MentoringHomeComponent implements OnInit {
     "sessionTitle": "management",
     "type":"mentor"
   }
+  private _headerConfig = {
+    showHeader: true,
+    showBurgerMenu: false,
+    pageTitle: '',
+    actionButtons: [] as string[]
+  };
 
   constructor(
     private headerService: AppHeaderService,
@@ -27,6 +33,8 @@ export class MentoringHomeComponent implements OnInit {
 
   async ionViewWillEnter() {
     this.headerService.showHeaderWithBackButton();
+    this._headerConfig.pageTitle = "Mentors";
+    this.headerService.updatePageConfig(this._headerConfig);
     this.loader.startLoader();
     this.commonService.getMentors(this.payload)
     .subscribe((res) => {
