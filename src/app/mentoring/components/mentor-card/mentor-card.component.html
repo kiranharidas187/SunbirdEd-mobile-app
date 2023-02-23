@@ -1,6 +1,6 @@
 <div class>
   <ion-card>
-    <img src="assets/imgs/avatar.jpeg" class="pic" />
+    <img *ngIf="cardData?.mentor?.imageUrl" [src]="cardData?.mentor?.imageUrl" class="pic" />
     <div class="overlay"></div>
     <div class="body">
       <h2>{{cardData?.mentor?.name}}</h2>

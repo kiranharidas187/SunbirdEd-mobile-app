@@ -9,12 +9,9 @@ export class MentorCardComponent implements OnInit {
 
   @Input() cardData: any;
 
-
   constructor() { }
 
   ngOnInit() {
-   console.log(this.cardData);
-    
   }
 
 }
