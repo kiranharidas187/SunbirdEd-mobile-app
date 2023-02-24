@@ -1,5 +1,5 @@
 <div class>
-  <ion-card>
+  <ion-card (click)="onSelect(cardData)">
     <img *ngIf="cardData?.mentor?.imageUrl" [src]="cardData?.mentor?.imageUrl" class="pic" />
     <div class="overlay"></div>
     <div class="body">

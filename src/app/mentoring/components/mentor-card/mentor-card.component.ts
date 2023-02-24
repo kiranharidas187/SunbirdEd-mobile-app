@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-mentor-card',
@@ -8,10 +8,14 @@ import { Component, Input, OnInit } from '@angular/core';
 export class MentorCardComponent implements OnInit {
 
   @Input() cardData: any;
-
+  @Output() cardSelect = new EventEmitter();
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onSelect(data){
+    this.cardSelect.emit(data)
   }
 
 }

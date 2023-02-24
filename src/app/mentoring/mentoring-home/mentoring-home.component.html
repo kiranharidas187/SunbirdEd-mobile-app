@@ -1,5 +1,5 @@
 <ion-content>
   <div *ngFor="let mentor of mentors">
-    <app-mentor-card [cardData]="mentor"></app-mentor-card>
+    <app-mentor-card [cardData]="mentor" (cardSelect)="onClick($event)"></app-mentor-card>
   </div>
 </ion-content>

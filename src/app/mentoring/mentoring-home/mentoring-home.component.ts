@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AppHeaderService } from '@app/services/app-header.service';
 import { CommonService } from '../common.service';
 import { faker } from '@faker-js/faker';
-import { LoaderService } from '@app/app/manage-learn/core';
+import { LoaderService, UtilsService } from '@app/app/manage-learn/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mentoring-home',
@@ -26,7 +27,9 @@ export class MentoringHomeComponent implements OnInit {
   constructor(
     private headerService: AppHeaderService,
     private commonService:CommonService,
-    private loader: LoaderService
+    private loader: LoaderService,
+    private utilsService : UtilsService,
+    private router : Router
   ) { }
 
   ngOnInit(): void {}
@@ -45,5 +48,14 @@ export class MentoringHomeComponent implements OnInit {
       this.mentors = res.data.mentors
     })
   }
+  onClick(data){
+    let userData = localStorage.getItem('mentorAppUser');
+    if(!userData){
+      this.utilsService.openLoginModal();
+    }else{
+      this.router.navigate(['mentoring/confirm-session'],{state:data});
+    }
   }
+  }
+
 ​
