@@ -1,0 +1,15 @@
+<ion-card>
+  <ion-card-content>
+    <section class="session" >
+      <img alt="session_pic" [src]="session.item.image" />
+      <div>
+        <h6>{{session.item.title}} | {{session.fulfillment.type === "ONLINE" ? "Online" : 'Offline'}}</h6>
+        <!-- <h6>{{session.item.title}} | {{session.fulfillment.type === "ONLINE" ? "Online" : 'Offline'}} | {{getDuration(session.fulfillment.startTime,session.fulfillment.endTime)}}</h6> -->
+        <p>{{session.fulfillment.language}}</p>
+        <p>Starts at : {{session.fulfillment.startTime | date : 'short'}}</p>
+        <p>Ends at : {{session.fulfillment.endTime | date : 'short'}}</p>
+        <p>Price : {{session.item.price === '0' ? 'Free' : session.item.price | currency: "INR"}}</p>
+      </div>
+    </section>
+  </ion-card-content>
+</ion-card>
