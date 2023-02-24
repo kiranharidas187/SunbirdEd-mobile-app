@@ -25,4 +25,7 @@ export class CommonService {
     return this.http.post('https://dev.elevate-apis.shikshalokam.org/osl-bap/user/profile/add',payload)
   }
 
+  getMentorDetails(id='63f1ebea23df08285693651a'):Observable<any> {
+    return this.http.post('https://dev.elevate-apis.shikshalokam.org/osl-bap/dsep/select',{itemId:id})
+  }
 }

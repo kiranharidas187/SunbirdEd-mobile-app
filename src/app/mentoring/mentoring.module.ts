@@ -6,6 +6,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { MentoringHomeComponent } from './mentoring-home/mentoring-home.component';
 import { MentorCardComponent } from './components/mentor-card/mentor-card.component';
 import { ConfirmSessionComponent } from './components/confirm-session/confirm-session.component';
+import { MentorDetailsComponent } from './components/mentor-card/mentor-details/mentor-details.component';
+import { MentorSessionCardComponent } from './components/mentor-card/mentor-session-card/mentor-session-card.component';
 
 const routes: Routes = [
   {
@@ -15,12 +17,14 @@ const routes: Routes = [
   {
     path:"confirm-session",
     component:ConfirmSessionComponent
+  },{
+    path:"mentor-details",
+    component:MentorDetailsComponent
   }
 ]
 
-
 @NgModule({
-  declarations: [MentoringHomeComponent, MentorCardComponent,ConfirmSessionComponent],
+  declarations: [MentoringHomeComponent, MentorCardComponent, MentorDetailsComponent,ConfirmSessionComponent, MentorSessionCardComponent],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     CommonModule,

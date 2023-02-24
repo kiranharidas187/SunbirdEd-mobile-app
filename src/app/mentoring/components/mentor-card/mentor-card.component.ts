@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-mentor-card',
   templateUrl: './mentor-card.component.html',
@@ -9,13 +9,12 @@ export class MentorCardComponent implements OnInit {
 
   @Input() cardData: any;
   @Output() cardSelect = new EventEmitter();
-  constructor() { }
+  constructor(private router:Router) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  onSelect(data){
-    this.cardSelect.emit(data)
+  openMentorDetails() {
+    this.router.navigate(['/mentoring/mentor-details'],{state:{mentor:this.cardData}})
   }
 
 }

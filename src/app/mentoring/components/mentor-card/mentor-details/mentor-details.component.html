@@ -1,0 +1,44 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Mentor Details
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <section class="screen-saver">
+      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/pr-sample23.jpg" class="profile">
+    </section>
+    <section class="mx2">
+      <h3 class="pr-2" style="margin-top: 7rem;">{{mentor?.mentor?.name}}</h3>
+      <h5 class="pr-2">{{mentor?.mentor?.specialistIn}}</h5>
+    </section>
+    <section>
+      <!-- <h4>Overview</h4> -->
+      <ion-card class="mentor-details">
+        <ion-card-header>
+          <ion-card-title>Mentor Summary</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <p><b>{{mentor?.mentor?.experience}}</b> of Experience</p>
+          <p><b>{{mentor?.mentor?.totalMeetings}}</b> of Total meetings</p>
+          <p>Qualification of <b>{{mentor?.mentor?.qualification}}</b></p>
+          <p>Professional Experience in <b>{{mentor?.mentor?.professionalExperience}}</b></p>
+        </ion-card-content>
+      </ion-card>
+    </section>
+    <p class="about">{{mentor?.mentor?.aboutMentor}}</p>
+    <h4 class="session-header">Available Sessions</h4>
+    <section class="sessions-holder">
+      <section class="session-content" *ngFor="let session of mentor.slots" [ngClass]="{'is-selected':session.isSelected}" (click)="changeSelection(session)">
+        <app-mentor-session-card [session]="session"></app-mentor-session-card>
+      </section>
+    </section>
+    <ion-footer [translucent]="true">
+      <ion-toolbar class="tool-bar-bottom">
+        <ion-title><ion-button (click)="onClick()">Book Session</ion-button></ion-title>
+      </ion-toolbar>
+    </ion-footer>
+</ion-content>
