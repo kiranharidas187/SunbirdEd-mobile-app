@@ -13,13 +13,9 @@ export class MentorCardComponent implements OnInit {
 
   constructor(private router:Router) { }
 
-  ngOnInit() {
-   console.log(this.cardData);
-  
-  }
+  ngOnInit() {}
 
   openMentorDetails() {
-    console.log("called route")
     this.router.navigate(['/mentoring/mentor-details'],{state:{mentor:this.cardData}})
   }
 

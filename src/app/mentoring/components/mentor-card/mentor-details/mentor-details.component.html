@@ -33,11 +33,6 @@
     <h4 class="session-header">Available Sessions</h4>
     <section class="session-content" *ngFor="let session of mentor.slots" [ngClass]="{'is-selected':session.isSelected}" (click)="changeSelection(session)">
       <ion-card>
-        <!-- <ion-card-header>
-          <ion-card-title>Card Title</ion-card-title>
-          <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-        </ion-card-header> -->
-
         <ion-card-content>
           <section class="session" >
             <img alt="session_pic" [src]="session.item.image" />
