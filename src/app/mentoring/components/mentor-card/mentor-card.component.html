@@ -1,11 +1,6 @@
 <div class>
-<<<<<<< HEAD
-  <ion-card (click)="openMentorDetails()">
-    <img src="assets/imgs/avatar.jpeg" class="pic" />
-=======
   <ion-card>
     <img *ngIf="cardData?.mentor?.imageUrl" [src]="cardData?.mentor?.imageUrl" class="pic" />
->>>>>>> kiran/hackathon
     <div class="overlay"></div>
     <div class="body">
       <h2>{{cardData?.mentor?.name}}</h2>

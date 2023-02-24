@@ -29,13 +29,7 @@ export class MentoringHomeComponent implements OnInit {
     private loader: LoaderService
   ) { }
 
-<<<<<<< HEAD
-  ngOnInit(): void {
-    console.log("mentronig home")
-  }
-=======
   ngOnInit(): void {}
->>>>>>> kiran/hackathon
 
   async ionViewWillEnter() {
     this.headerService.showHeaderWithBackButton();
