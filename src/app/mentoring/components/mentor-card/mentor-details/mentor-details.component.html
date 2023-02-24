@@ -31,22 +31,14 @@
     </section>
     <p class="about">{{mentor?.mentor?.aboutMentor}}</p>
     <h4 class="session-header">Available Sessions</h4>
-    <section class="session-content" *ngFor="let session of mentor.slots" [ngClass]="{'is-selected':session.isSelected}" (click)="changeSelection(session)">
-      <ion-card>
-        <ion-card-content>
-          <section class="session" >
-            <img alt="session_pic" [src]="session.item.image" />
-            <div>
-              <h6>{{session.item.title}} | {{session.fulfillment.type === "ONLINE" ? "Online" : 'Offline'}}</h6>
-              <!-- <h6>{{session.item.title}} | {{session.fulfillment.type === "ONLINE" ? "Online" : 'Offline'}} | {{getDuration(session.fulfillment.startTime,session.fulfillment.endTime)}}</h6> -->
-              <p>{{session.fulfillment.language}}</p>
-              <p>Starts at : {{session.fulfillment.startTime | date : 'short'}}</p>
-              <p>Ends at : {{session.fulfillment.endTime | date : 'short'}}</p>
-              <p>Price : {{session.item.price === '0' ? 'Free' : session.item.price | currency: "INR"}}</p>
-            </div>
-          </section>
-        </ion-card-content>
-      </ion-card>
+    <section class="sessions-holder">
+      <section class="session-content" *ngFor="let session of mentor.slots" [ngClass]="{'is-selected':session.isSelected}" (click)="changeSelection(session)">
+        <app-mentor-session-card [session]="session"></app-mentor-session-card>
+      </section>
     </section>
-    <ion-button>Book Session</ion-button>
+    <ion-footer [translucent]="true">
+      <ion-toolbar class="tool-bar-bottom">
+        <ion-title><ion-button>Book Session</ion-button></ion-title>
+      </ion-toolbar>
+    </ion-footer>
 </ion-content>
