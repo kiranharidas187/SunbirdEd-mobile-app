@@ -9,7 +9,9 @@ export class CommonService {
 
   constructor(private http: HttpClient) { }
 
-  getMentors(payload:any):Observable<any> {
-    return this.http.post('https://dev.elevate-apis.shikshalokam.org/osl-bap/dsep/search',payload)
+  baseUrl = "https://dev.elevate-apis.shikshalokam.org/osl-bap"
+
+  searchApi(payload:any):Observable<any> {
+    return this.http.post(`${this.baseUrl}/dsep/search`,payload)
   }
 }
