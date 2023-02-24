@@ -21,7 +21,7 @@ export class MentoringHomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
+    console.log("mentronig home")
   }
 
   async ionViewWillEnter() {

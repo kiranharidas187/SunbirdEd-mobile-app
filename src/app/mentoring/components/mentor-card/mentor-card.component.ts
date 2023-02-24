@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mentor-card',
@@ -10,11 +11,16 @@ export class MentorCardComponent implements OnInit {
   @Input() cardData: any;
 
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit() {
    console.log(this.cardData);
-    
+  
+  }
+
+  openMentorDetails() {
+    console.log("called route")
+    this.router.navigate(['/mentoring/mentor-details'],{state:{mentor:this.cardData}})
   }
 
 }
