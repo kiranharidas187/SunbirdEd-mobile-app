@@ -10,6 +10,7 @@ export class MentorCardComponent implements OnInit {
 
   @Input() cardData: any;
 
+<<<<<<< HEAD
 
   constructor(private router:Router) { }
 
@@ -21,6 +22,11 @@ export class MentorCardComponent implements OnInit {
   openMentorDetails() {
     console.log("called route")
     this.router.navigate(['/mentoring/mentor-details'],{state:{mentor:this.cardData}})
+=======
+  constructor() { }
+
+  ngOnInit() {
+>>>>>>> kiran/hackathon
   }
 
 }
