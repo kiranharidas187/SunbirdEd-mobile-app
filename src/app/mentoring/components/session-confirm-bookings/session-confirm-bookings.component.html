@@ -17,15 +17,16 @@
   <ion-card *ngFor="let booking of bookings">
     <img alt="event image" [src]='booking.details.item.image' />
     <ion-badge color="tertiary">Booking confirmed</ion-badge>
-    <ion-card-header>
-      <ion-card-title> {{booking.details.item.title}}</ion-card-title>
+    <ion-card-header *ngIf="booking.type === 'session'">
+      <ion-card-title>{{booking.details.item.title}}</ion-card-title>
     </ion-card-header>
   
     <ion-card-content>
-      <p>Mentor :<b>{{booking.details.mentor.name}}</b></p>
-      <p>Type : <b>{{booking.type}}</b></p>
+      <p>Mentor :<b>&nbsp;{{booking.details.mentor.name}}</b></p>
+      <!-- <p>Type : <b>{{booking.type}}</b></p> -->
       <p>Starts At : <b>{{booking.details.fulfillment.startTime | date : 'EEEE, MM d, y'}}</b></p>
       <p>Price : <b>{{booking.details.item.price | currency : "INR"}}</b></p>
+      <ion-button (click)="openLink(bookings.joinLink)">Join Session at {{booking.details.fulfillment.startTime | date : 'EEEE,d h:mm a'}}</ion-button>
     </ion-card-content>
   </ion-card>
 </section>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-session-confirm-bookings',
   templateUrl: './session-confirm-bookings.component.html',
@@ -126,5 +127,11 @@ export class SessionConfirmBookingsComponent implements OnInit {
   segmentChanged(event) {
     this.segmentType = event.detail.value;
   }
+
+  openLink(link:string) {
+    (window as any).cordova.InAppBrowser.open(link, '_blank');
+  }
+
+  
 
 }
