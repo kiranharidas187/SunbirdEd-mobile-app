@@ -1,0 +1,31 @@
+<!-- <div class="project-segments">
+  <ion-segment [(ngModel)]="segmentType" (ionChange)="segmentChanged($event)" class="segment-card">
+    <ion-segment-button value="mentor" class="flex-5">
+      <ion-label class="font-12 text-transform-none">Mentors</ion-label>
+    </ion-segment-button>
+    <div class="hr-div">
+      <hr class="hr-height">
+    </div>
+    <ion-segment-button value="sessions" class="flex-5">
+      <ion-label class="font-12 text-transform-none">Sessions
+      </ion-label>
+    </ion-segment-button>
+  </ion-segment>
+</div> -->
+<h3>Confirmed Bookings</h3>
+<section class="card-container">
+  <ion-card *ngFor="let booking of bookings">
+    <img alt="event image" [src]='booking.details.item.image' />
+    <ion-badge color="tertiary">Booking confirmed</ion-badge>
+    <ion-card-header>
+      <ion-card-title> {{booking.details.item.title}}</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <p>Mentor :<b>{{booking.details.mentor.name}}</b></p>
+      <p>Type : <b>{{booking.type}}</b></p>
+      <p>Starts At : <b>{{booking.details.fulfillment.startTime | date : 'EEEE, MM d, y'}}</b></p>
+      <p>Price : <b>{{booking.details.item.price | currency : "INR"}}</b></p>
+    </ion-card-content>
+  </ion-card>
+</section>

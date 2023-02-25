@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule, Routes } from '@angular/router';
 import { MentoringHomeComponent } from './mentoring-home/mentoring-home.component';
 import { MentorCardComponent } from './components/mentor-card/mentor-card.component';
+import { ConfirmSessionComponent } from './components/confirm-session/confirm-session.component';
 import { MentorDetailsComponent } from './components/mentor-card/mentor-details/mentor-details.component';
 import { MentorSessionCardComponent } from './components/mentor-card/mentor-session-card/mentor-session-card.component';
 import { SessionConfirmBookingsComponent } from './components/session-confirm-bookings/session-confirm-bookings.component';
@@ -15,6 +16,9 @@ const routes: Routes = [
     component:MentoringHomeComponent
   },
   {
+    path:"confirm-session",
+    component:ConfirmSessionComponent
+  },{
     path:"mentor-details",
     component:MentorDetailsComponent
   },
@@ -24,20 +28,13 @@ const routes: Routes = [
   }
 ]
 
-
 @NgModule({
-  declarations: [
-    MentoringHomeComponent,
-    MentorCardComponent,
-    MentorDetailsComponent,
-    MentorSessionCardComponent,
-    SessionConfirmBookingsComponent
-  ],
+  declarations: [MentoringHomeComponent, MentorCardComponent, MentorDetailsComponent,ConfirmSessionComponent, MentorSessionCardComponent,SessionConfirmBookingsComponent],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     CommonModule,
     TranslateModule.forChild(),
     IonicModule,
-    RouterModule.forChild(routes),  ]
+    RouterModule.forChild(routes)]
 })
 export class MentoringModule { }

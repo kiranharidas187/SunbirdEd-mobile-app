@@ -1,6 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
-
 @Component({
   selector: 'app-mentor-card',
   templateUrl: './mentor-card.component.html',
@@ -9,8 +8,7 @@ import { Router } from '@angular/router';
 export class MentorCardComponent implements OnInit {
 
   @Input() cardData: any;
-
-
+  @Output() cardSelect = new EventEmitter();
   constructor(private router:Router) { }
 
   ngOnInit() {}

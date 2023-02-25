@@ -14,36 +14,49 @@ export class MentoringHomeComponent implements OnInit {
   mentors;
   payload = {
     "sessionTitle": "management",
-    "type":"mentor"
+    "type": "mentor"
   }
-  private _headerConfig = {
-    showHeader: true,
-    showBurgerMenu: false,
-    pageTitle: '',
-    actionButtons: [] as string[]
-  };
+  segmentType = "mentor";
+  sessions;
 
   constructor(
     private headerService: AppHeaderService,
-    private commonService:CommonService,
+    private commonService: CommonService,
     private loader: LoaderService
   ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
+
+  segmentChanged(event) {
+    this.segmentType = event.detail.value;
+  }
 
   async ionViewWillEnter() {
-    this.headerService.showHeaderWithBackButton();
-    this._headerConfig.pageTitle = "Mentors";
-    this.headerService.updatePageConfig(this._headerConfig);
+    this.getMentors()
+  }
+
+  getMentors() {
     this.loader.startLoader();
-    this.commonService.getMentors(this.payload)
-    .subscribe((res) => {
-      this.loader.stopLoader();
-      for (const item of res.data.mentors) {
-        item.mentor.imageUrl = faker.image.people( 500, 500,  true)
-      }
-      this.mentors = res.data.mentors
-    })
+    this.payload.type = "mentor"
+    this.commonService.searchApi(this.payload)
+      .subscribe((res) => {
+        this.loader.stopLoader();
+        for (const item of res.data.mentors) {
+          item.mentor.imageUrl = faker.image.people(500, 500, true)
+        }
+        this.mentors = res.data.mentors
+      })
   }
+
+  getSessions() {
+    this.loader.startLoader();
+    this.payload.type = "session"
+    this.commonService.searchApi(this.payload)
+      .subscribe((res) => {
+        this.loader.stopLoader();
+        this.sessions = res?.data?.sessions;
+        console.log(res)
+      })
   }
-​
+}
+

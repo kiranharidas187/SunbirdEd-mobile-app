@@ -20,6 +20,8 @@ import { Events } from '@app/util/events';
 import { Location } from "@angular/common";
 import { ToastService } from "./toast/toast.service";
 import { TranslateService } from "@ngx-translate/core";
+import { CommonService } from "@app/app/mentoring/common.service";
+import { read } from "fs";
 
 @Injectable({
   providedIn: "root"
@@ -54,6 +56,7 @@ export class UtilsService {
     private location : Location,
     private toast : ToastService,
     private translate: TranslateService,
+    private commonService : CommonService
 
   ) {
     this.events.subscribe("loggedInProfile:update", _ => {
@@ -779,5 +782,76 @@ return data;
      
     ];
     return tabs;
+  }
+
+
+  async openLoginModal(){
+    const alert = await this.aleryCtrl.create({
+      header: 'Please login here',
+      cssClass:'attachment-delete-alert',
+      buttons: [
+        {
+          text: 'Cancel',
+          cssClass: 'alert-button-cancel',
+        },
+        {
+          text: 'Submit',
+          cssClass: 'alert-button-confirm',
+          handler: (data) => {
+            this.action(data[0]);
+          },
+        },
+      ],
+      inputs: [
+        {
+          placeholder: 'Please enter registered email',
+        }
+      ],
+    });
+
+    await alert.present();
+  }
+
+  action(data){
+    let payload ={
+        "email":data,
+        "password":"testpassword"
+    }
+    this.commonService.login(payload).subscribe(success =>{
+      if(success.status){
+       localStorage.setItem('mentorAppUser',success.data);
+       this.router.navigate(['mentoring/confirm-session']);
+       this.toast.showMessage(success.message);
+      }else{
+        this.signup(payload);
+      }
+    },error =>{
+      this.signup(payload);
+    })
+  }
+  signup(payload){
+    this.commonService.signup(payload).subscribe(response =>{
+      if(response.status){
+        localStorage.setItem('mentorAppUser',response.data);
+        let data ={
+          name : 'Joffin'
+        }
+        this.addProfile(data);
+        this.toast.showMessage(response.message);
+       }
+    },error =>{
+      console.log(error,"error");
+    })
+  }
+  addProfile(name){
+    this.commonService.addProfile(name).subscribe(res =>{
+      if(res.status){
+        this.router.navigate(['mentoring/confirm-session']);
+        this.toast.showMessage(res.message);
+      }else{
+        this.toast.showMessage(res.message,'danger');
+      }
+    },error =>{
+    })
   }
 }
