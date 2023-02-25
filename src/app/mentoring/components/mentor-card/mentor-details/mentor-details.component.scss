@@ -63,7 +63,24 @@ ion-button {
     padding: 0 2rem;
 }
 .session-content {
-    margin: 1rem 2rem;
+    background: white;
+    margin: 10px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .date {
+        font-weight: bold;
+        text-align: center;
+    }
+    p {
+        margin-bottom: .5rem;
+        text-align: center;
+    }
+}
+ion-row {
+    margin-left: 1rem;
 }
 .about {
     margin: 2rem;

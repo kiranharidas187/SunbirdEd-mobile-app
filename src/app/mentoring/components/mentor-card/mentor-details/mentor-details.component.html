@@ -32,13 +32,19 @@
     <p class="about">{{mentor?.mentor?.aboutMentor}}</p>
     <h4 class="session-header">Available Sessions</h4>
     <section class="sessions-holder">
-      <section class="session-content" *ngFor="let session of mentor.slots" [ngClass]="{'is-selected':session.isSelected}" (click)="changeSelection(session)">
-        <app-mentor-session-card [session]="session"></app-mentor-session-card>
-      </section>
+      <ion-grid>
+        <ion-row>
+          <ion-col class="session-content" size="3" *ngFor="let session of mentor.slots" [ngClass]="{'is-selected':session.isSelected}" (click)="changeSelection(session)">
+              <p class="session-day" >{{session.fulfillment.startTime | date : 'EE'}}</p>
+              <p class="date">{{session.fulfillment.startTime | date : 'MMM d'}}</p>
+              <p class="">{{session.fulfillment.startTime | date : 'h:mm a'}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </section>
     <ion-footer [translucent]="true">
       <ion-toolbar class="tool-bar-bottom">
-        <ion-title><ion-button>Book Session</ion-button></ion-title>
+        <ion-title><ion-button (click)="gotoBooking()">Book Session</ion-button></ion-title>
       </ion-toolbar>
     </ion-footer>
 </ion-content>

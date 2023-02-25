@@ -13,7 +13,7 @@ import * as moment from 'moment';
 export class MentorDetailsComponent {
 
   mentor:any;
-  constructor(private commonService:CommonService) {
+  constructor(private commonService:CommonService, private router:Router) {
     this.mentor = history.state.mentor;
     this.mentor.slots[0].isSelected = true;
   }
@@ -27,6 +27,10 @@ export class MentorDetailsComponent {
         item.isSelected = false;
       }
     })
+  }
+
+  gotoBooking() {
+    this.router.navigate(['/mentoring/confirm-booking'])
   }
 
 //   getDuration(start,end) {

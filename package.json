@@ -106,7 +106,6 @@
     "cordova-plugin-media": "^6.0.0",
     "cordova-plugin-network-information": "^2.0.2",
     "cordova-plugin-printer": "^0.8.0",
-    "cordova-plugin-screen-orientation": "^3.0.2",
     "cordova-plugin-secure-storage-echo": "^5.1.1",
     "cordova-plugin-statusbar": "^2.4.3",
     "cordova-plugin-streaming-media": "^2.3.0",
