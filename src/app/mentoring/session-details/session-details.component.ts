@@ -40,7 +40,12 @@ export class SessionDetailsComponent implements OnInit {
 
   rsvpSessionClick() {
     // this.loader.startLoader();
-    this.common.checkForLogin();
+    const payload = {
+      itemId:this.sessionDetails.item.id,
+      fulfillmentId: this.sessionDetails.fulfillment.id,
+      type: 'session'
+    }
+    this.common.checkForLogin(payload);
 
   }
 

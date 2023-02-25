@@ -8,10 +8,10 @@
 
 <ion-content [fullscreen]="true">
     <section class="screen-saver">
-      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/pr-sample23.jpg" class="profile">
+      <img [src]="mentor?.mentor?.imageUrl" class="profile">
     </section>
     <section class="mx2">
-      <h3 class="pr-2" style="margin-top: 7rem;">{{mentor?.mentor?.name}}</h3>
+      <h3 class="pr-2" style="margin-top: 4rem;">{{mentor?.mentor?.name}}</h3>
       <h5 class="pr-2">{{mentor?.mentor?.specialistIn}}</h5>
     </section>
     <section>
@@ -42,9 +42,9 @@
         </ion-row>
       </ion-grid>
     </section>
-    <ion-footer [translucent]="true">
+    <ion-footer [translucent]="true" *ngIf="selectedSlot">
       <ion-toolbar class="tool-bar-bottom">
-        <ion-title><ion-button (click)="gotoBooking()">Book Session</ion-button></ion-title>
+        <ion-title><ion-button (click)="onBookClick()">Book Slot</ion-button></ion-title>
       </ion-toolbar>
     </ion-footer>
 </ion-content>

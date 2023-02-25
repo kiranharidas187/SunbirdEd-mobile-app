@@ -16,7 +16,8 @@ export class CommonService {
     private toast: ToastService,
     private alertCtrl: AlertController) { }
 
-  baseUrl = "https://dev.elevate-apis.shikshalokam.org/osl-bap"
+  baseUrl = "https://dev.elevate-apis.shikshalokam.org/osl-bap";
+  initPayload;
 
   searchApi(payload: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/dsep/search`, payload)
@@ -32,8 +33,8 @@ export class CommonService {
 
   addProfileApi(payload): Observable<any> {
     const userToken = JSON.parse(localStorage.getItem('mentorAppUser'));
-    return this.http.post('https://dev.elevate-apis.shikshalokam.org/osl-bap/user/profile/add', payload,{
-      headers:{
+    return this.http.post('https://dev.elevate-apis.shikshalokam.org/osl-bap/user/profile/add', payload, {
+      headers: {
         'Authorization': `Bearer ${userToken.accessToken}`
       }
     })
@@ -54,11 +55,14 @@ export class CommonService {
     return this.http.post(`${this.baseUrl}/dsep/init`, payload)
   }
 
-  checkForLogin() {
-    const mentorUSerDetails =   localStorage.getItem('mentorAppUser');
+  checkForLogin(initPayload) {
+    this.initPayload = initPayload;
+    const mentorUSerDetails = localStorage.getItem('mentorAppUser');
     console.log(mentorUSerDetails)
-    if(!mentorUSerDetails) {
+    if (!mentorUSerDetails) {
       this.openLoginModal();
+    } else {
+      this.router.navigate([`mentoring/confirm-session/${this.initPayload.itemId}/${this.initPayload.fulfillmentId}`], { queryParams: { type: this.initPayload.type } });
     }
   }
 
@@ -97,7 +101,7 @@ export class CommonService {
     this.login(payload).subscribe(success => {
       if (success.status) {
         localStorage.setItem('mentorAppUser', JSON.stringify(success.data));
-        this.router.navigate(['mentoring/confirm-session']);
+        this.router.navigate([`mentoring/confirm-session/${this.initPayload.itemId}/${this.initPayload.fulfillmentId}`], { queryParams: { type: this.initPayload.type } });
       } else {
         this.signup(payload);
       }
@@ -122,11 +126,31 @@ export class CommonService {
   addProfile(name) {
     this.addProfileApi(name).subscribe(res => {
       if (res.status) {
-        this.router.navigate(['mentoring/confirm-session']);
+        this.router.navigate([`mentoring/confirm-session/${this.initPayload.itemId}/${this.initPayload.fulfillmentId}`]);
       } else {
         this.toast.showMessage(res.message, 'danger');
       }
     }, error => {
+    })
+  }
+
+  initCall(payload) {
+    
+    const userToken = JSON.parse(localStorage.getItem('mentorAppUser'));
+    return this.http.post(`${this.baseUrl}/dsep/init`, payload, {
+      headers: {
+        'Authorization': `Bearer ${userToken.accessToken}`
+      }
+    })
+  }
+
+  confirmCall(payload) {
+ 
+    const userToken = JSON.parse(localStorage.getItem('mentorAppUser'));
+    return this.http.post(`${this.baseUrl}/dsep/confirm`, payload, {
+      headers: {
+        'Authorization': `Bearer ${userToken.accessToken}`
+      }
     })
   }
 }

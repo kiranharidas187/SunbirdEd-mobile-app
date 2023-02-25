@@ -69,7 +69,8 @@ export class MentoringHomeComponent implements OnInit {
       .subscribe((res) => {
         this.loader.stopLoader();
         for (const item of res.data.mentors) {
-          item.mentor.imageUrl = faker.image.people(500, 500, true)
+          // item.mentor.imageUrl = faker.image.people(500, 500, true)
+          item.mentor.imageUrl= `./assets/profile/${Math.floor((Math.random() * 35) + 1)}.jpg`
         }
         this.mentors = res.data.mentors
       }, error => {

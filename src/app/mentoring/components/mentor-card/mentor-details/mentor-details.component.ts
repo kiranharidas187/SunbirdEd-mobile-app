@@ -12,18 +12,19 @@ import * as moment from 'moment';
 
 export class MentorDetailsComponent {
 
-  mentor:any;
-  constructor(private commonService:CommonService,
-    private utilsService : UtilsService,
-    private router  : Router
-    ) {
+  mentor: any;
+  selectedSlot;
+  constructor(private commonService: CommonService,
+    private utilsService: UtilsService,
+    private router: Router
+  ) {
     this.mentor = history.state.mentor;
-    this.mentor.slots[0].isSelected = true;
   }
 
-  changeSelection(slot:any) {
-    this.mentor.slots.forEach((item:any) => {
-      if(slot.item.id === item.item.id) {
+  changeSelection(slot: any) {
+    this.selectedSlot = slot;
+    this.mentor.slots.forEach((item: any) => {
+      if (slot.item.id === item.item.id) {
         item.isSelected = true;
       }
       else {
@@ -36,30 +37,36 @@ export class MentorDetailsComponent {
     this.router.navigate(['/mentoring/confirm-booking'])
   }
 
-//   getDuration(start,end) {
-//     // start time and end time
-//     let startTime = moment(start);
-//     let endTime = moment(end);
+  //   getDuration(start,end) {
+  //     // start time and end time
+  //     let startTime = moment(start);
+  //     let endTime = moment(end);
 
-//     // calculate total duration
-//     let duration:any = moment.duration(endTime.diff(startTime));
+  //     // calculate total duration
+  //     let duration:any = moment.duration(endTime.diff(startTime));
 
-//     // duration in hours
-//     let hours = parseInt(duration.asHours());
+  //     // duration in hours
+  //     let hours = parseInt(duration.asHours());
 
-//     // duration in minutes
-//     let minutes = parseInt(duration.asMinutes()) % 60;
-//     console.log(hours,minutes)
-//     // return `${hours}`
-//     return '45 Mins'
-//   }
+  //     // duration in minutes
+  //     let minutes = parseInt(duration.asMinutes()) % 60;
+  //     console.log(hours,minutes)
+  //     // return `${hours}`
+  //     return '45 Mins'
+  //   }
 
-onClick(){
-  let userData = localStorage.getItem('mentorAppUser');
-  if(!userData){
-    this.commonService.openLoginModal();
-  }else{
-    this.router.navigate(['mentoring/confirm-session'],{state:this.mentor});
+  onBookClick() {
+    // let userData = localStorage.getItem('mentorAppUser');
+    // if (!userData) {
+    //   this.commonService.openLoginModal();
+    // } else {
+    //   this.router.navigate(['mentoring/confirm-session'], { state: this.mentor });
+    // }
+    const payload = {
+      itemId: this.selectedSlot.item.id,
+      fulfillmentId: this.selectedSlot.fulfillment.id,
+      type: 'mentor'
+    }
+    this.commonService.checkForLogin(payload);
   }
-}
 }

@@ -17,7 +17,7 @@ const routes: Routes = [
     component:MentoringHomeComponent
   },
   {
-    path:"confirm-session",
+    path:"confirm-session/:itemId/:fulfillmentId",
     component:ConfirmSessionComponent
   },{
     path:"mentor-details",
