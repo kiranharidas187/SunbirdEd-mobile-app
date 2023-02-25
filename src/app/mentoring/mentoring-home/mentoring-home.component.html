@@ -22,7 +22,7 @@
 
   <div *ngIf="segmentType=='sessions'">
     <div *ngFor="let session of sessions">
-      <app-mentor-session-card [session]="session"></app-mentor-session-card>
+      <app-mentor-session-card [session]="session" (onCardCickEvent)="goToSessionDetails($event)"></app-mentor-session-card>
     </div>
   </div>
 

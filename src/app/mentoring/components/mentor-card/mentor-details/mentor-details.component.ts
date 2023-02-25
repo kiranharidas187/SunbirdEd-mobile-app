@@ -53,7 +53,7 @@ export class MentorDetailsComponent {
 onClick(){
   let userData = localStorage.getItem('mentorAppUser');
   if(!userData){
-    this.utilsService.openLoginModal();
+    this.commonService.openLoginModal();
   }else{
     this.router.navigate(['mentoring/confirm-session'],{state:this.mentor});
   }

@@ -8,6 +8,7 @@ import { MentorCardComponent } from './components/mentor-card/mentor-card.compon
 import { ConfirmSessionComponent } from './components/confirm-session/confirm-session.component';
 import { MentorDetailsComponent } from './components/mentor-card/mentor-details/mentor-details.component';
 import { MentorSessionCardComponent } from './components/mentor-card/mentor-session-card/mentor-session-card.component';
+import { SessionDetailsComponent } from './session-details/session-details.component';
 
 const routes: Routes = [
   {
@@ -20,11 +21,22 @@ const routes: Routes = [
   },{
     path:"mentor-details",
     component:MentorDetailsComponent
+  },
+  {
+    path:'session-details/:sessionId',
+    component: SessionDetailsComponent
   }
 ]
 
 @NgModule({
-  declarations: [MentoringHomeComponent, MentorCardComponent, MentorDetailsComponent,ConfirmSessionComponent, MentorSessionCardComponent],
+  declarations: [
+    MentoringHomeComponent, 
+    MentorCardComponent, 
+    MentorDetailsComponent,
+    ConfirmSessionComponent, 
+    MentorSessionCardComponent,
+    SessionDetailsComponent
+  ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     CommonModule,
