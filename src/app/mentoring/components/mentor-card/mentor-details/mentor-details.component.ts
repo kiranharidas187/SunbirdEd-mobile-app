@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router, RouterState } from '@angular/router';
+import { UtilsService } from '@app/app/manage-learn/core';
 import { CommonService } from '@app/app/mentoring/common.service';
 import * as moment from 'moment';
-
 
 @Component({
   selector: 'app-mentor-details',
@@ -13,7 +13,10 @@ import * as moment from 'moment';
 export class MentorDetailsComponent {
 
   mentor:any;
-  constructor(private commonService:CommonService) {
+  constructor(private commonService:CommonService,
+    private utilsService : UtilsService,
+    private router  : Router
+    ) {
     this.mentor = history.state.mentor;
     this.mentor.slots[0].isSelected = true;
   }
@@ -47,4 +50,12 @@ export class MentorDetailsComponent {
 //     return '45 Mins'
 //   }
 
+onClick(){
+  let userData = localStorage.getItem('mentorAppUser');
+  if(!userData){
+    this.utilsService.openLoginModal();
+  }else{
+    this.router.navigate(['mentoring/confirm-session'],{state:this.mentor});
+  }
+}
 }
