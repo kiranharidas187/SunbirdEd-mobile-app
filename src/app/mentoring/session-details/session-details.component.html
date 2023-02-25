@@ -1,0 +1,37 @@
+<ion-content>
+  <div class="container">
+    <h2 class="title">{{sessionDetails?.item?.title}}</h2>
+    <p class="time">
+      <ion-icon name="calendar" class="cal-icon"></ion-icon>
+      {{sessionDetails?.fulfillment?.startTime | date :'long'}}
+    </p>
+    <div>
+      <img [src]="sessionDetails?.item?.image" class="session-image" />
+      <span class="type">{{sessionDetails?.fulfillment?.type}}</span>
+    </div>
+    <ion-button class="rsvp" (click)="rsvpSessionClick()">RSVP for this session</ion-button>
+    <p>
+      {{sessionDetails?.item?.description}}
+    </p>
+    <ion-card>
+      <div class="mentor-container">
+        <p class="mntr-title">Hosted By</p>
+        <div class="flex-box">
+          <img [src]="mentorName" class="mentor-icon" />
+          <div class="mentor-details">
+            <b class="capitalizze">{{sessionDetails?.mentor?.name}}</b>
+            <div class="light-text">{{sessionDetails?.mentor?.professionalExperience}}</div>
+            <div class="light-text"><b>{{sessionDetails?.mentor?.experience}}</b> of experience</div>
+            <div class="light-text"><b>{{sessionDetails?.mentor?.totalMeetings}} </b> sessions conducted</div>
+          </div>
+        </div>
+
+        <div style="margin-top: 25px;">
+          <p class="mntr-title">About Mentor</p>
+          <div class="light-text">{{sessionDetails?.mentor?.aboutMentor}}</div>
+        </div>
+      </div>
+
+    </ion-card>
+  </div>
+</ion-content>

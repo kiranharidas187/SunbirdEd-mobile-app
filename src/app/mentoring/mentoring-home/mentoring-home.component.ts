@@ -3,6 +3,7 @@ import { AppHeaderService } from '@app/services/app-header.service';
 import { CommonService } from '../common.service';
 import { faker } from '@faker-js/faker';
 import { LoaderService } from '@app/app/manage-learn/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mentoring-home',
@@ -22,13 +23,19 @@ export class MentoringHomeComponent implements OnInit {
   constructor(
     private headerService: AppHeaderService,
     private commonService: CommonService,
-    private loader: LoaderService
+    private loader: LoaderService,
+    private router: Router
   ) { }
 
   ngOnInit(): void { }
 
   segmentChanged(event) {
     this.segmentType = event.detail.value;
+    if(this.segmentType === 'mentor'){
+      this.getMentors();
+    } else {
+      this.getSessions();
+    }
   }
 
   async ionViewWillEnter() {
@@ -57,6 +64,10 @@ export class MentoringHomeComponent implements OnInit {
         this.sessions = res?.data?.sessions;
         console.log(res)
       })
+  }
+
+  goToSessionDetails(session) {
+    this.router.navigate(['/mentoring/session-details/'+ session?.item?.id])
   }
 }
 

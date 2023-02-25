@@ -8,7 +8,11 @@ import { MentorCardComponent } from './components/mentor-card/mentor-card.compon
 import { ConfirmSessionComponent } from './components/confirm-session/confirm-session.component';
 import { MentorDetailsComponent } from './components/mentor-card/mentor-details/mentor-details.component';
 import { MentorSessionCardComponent } from './components/mentor-card/mentor-session-card/mentor-session-card.component';
+<<<<<<< HEAD
 import { SessionConfirmBookingsComponent } from './components/session-confirm-bookings/session-confirm-bookings.component';
+=======
+import { SessionDetailsComponent } from './session-details/session-details.component';
+>>>>>>> kiran/hackathon
 
 const routes: Routes = [
   {
@@ -23,13 +27,29 @@ const routes: Routes = [
     component:MentorDetailsComponent
   },
   {
+<<<<<<< HEAD
     path:"confirm-booking",
     component:SessionConfirmBookingsComponent
+=======
+    path:'session-details/:sessionId',
+    component: SessionDetailsComponent
+>>>>>>> kiran/hackathon
   }
 ]
 
 @NgModule({
+<<<<<<< HEAD
   declarations: [MentoringHomeComponent, MentorCardComponent, MentorDetailsComponent,ConfirmSessionComponent, MentorSessionCardComponent,SessionConfirmBookingsComponent],
+=======
+  declarations: [
+    MentoringHomeComponent, 
+    MentorCardComponent, 
+    MentorDetailsComponent,
+    ConfirmSessionComponent, 
+    MentorSessionCardComponent,
+    SessionDetailsComponent
+  ],
+>>>>>>> kiran/hackathon
   schemas:[CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     CommonModule,

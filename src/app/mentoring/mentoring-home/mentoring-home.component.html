@@ -13,7 +13,17 @@
       </ion-segment-button>
     </ion-segment>
   </div>
-  <div *ngFor="let mentor of mentors">
-    <app-mentor-card [cardData]="mentor" (cardSelect)="onClick($event)"></app-mentor-card>
+
+  <div *ngIf="segmentType=='mentor'">
+    <div *ngFor="let mentor of mentors">
+      <app-mentor-card [cardData]="mentor" (cardSelect)="onClick($event)"></app-mentor-card>
+    </div>
   </div>
+
+  <div *ngIf="segmentType=='sessions'">
+    <div *ngFor="let session of sessions">
+      <app-mentor-session-card [session]="session" (onCardCickEvent)="goToSessionDetails($event)"></app-mentor-session-card>
+    </div>
+  </div>
+
 </ion-content>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-mentor-session-card',
@@ -8,8 +8,13 @@ import { Component, Input, OnInit } from '@angular/core';
 export class MentorSessionCardComponent implements OnInit {
 
   @Input() session:any
+  @Output() onCardCickEvent =  new EventEmitter();
   constructor() { }
 
   ngOnInit() {}
+
+  onCardClick() {
+    this.onCardCickEvent.emit(this.session)
+  }
 
 }
