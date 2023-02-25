@@ -32,6 +32,10 @@ export class MentorDetailsComponent {
     })
   }
 
+  gotoBooking() {
+    this.router.navigate(['/mentoring/confirm-booking'])
+  }
+
 //   getDuration(start,end) {
 //     // start time and end time
 //     let startTime = moment(start);

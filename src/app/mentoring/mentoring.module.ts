@@ -8,6 +8,7 @@ import { MentorCardComponent } from './components/mentor-card/mentor-card.compon
 import { ConfirmSessionComponent } from './components/confirm-session/confirm-session.component';
 import { MentorDetailsComponent } from './components/mentor-card/mentor-details/mentor-details.component';
 import { MentorSessionCardComponent } from './components/mentor-card/mentor-session-card/mentor-session-card.component';
+import { SessionConfirmBookingsComponent } from './components/session-confirm-bookings/session-confirm-bookings.component';
 import { SessionDetailsComponent } from './session-details/session-details.component';
 
 const routes: Routes = [
@@ -25,6 +26,10 @@ const routes: Routes = [
   {
     path:'session-details/:sessionId',
     component: SessionDetailsComponent
+  },
+  {
+    path:"confirm-booking",
+    component:SessionConfirmBookingsComponent
   }
 ]
 
@@ -35,13 +40,14 @@ const routes: Routes = [
     MentorDetailsComponent,
     ConfirmSessionComponent, 
     MentorSessionCardComponent,
-    SessionDetailsComponent
+    SessionDetailsComponent,
+    SessionConfirmBookingsComponent
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     CommonModule,
     TranslateModule.forChild(),
     IonicModule,
-    RouterModule.forChild(routes),  ]
+    RouterModule.forChild(routes)]
 })
 export class MentoringModule { }
