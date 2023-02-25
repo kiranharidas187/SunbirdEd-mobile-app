@@ -2599,7 +2599,8 @@ export class EnrolledCourseDetailsPage implements OnInit, OnDestroy, ConsentPopo
   }
 
   seekMentorship(){
-    this.router.navigate([RouterLinks.MENTORING])
+    this.router.navigate([RouterLinks.MENTORING], {state: {searchString: this.courseCardData.courseName,
+      meta: this.courseCardData.description, enableSearch: true}})
   }
 
 }

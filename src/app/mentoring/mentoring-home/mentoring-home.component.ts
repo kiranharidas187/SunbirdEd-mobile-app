@@ -17,17 +17,36 @@ export class MentoringHomeComponent implements OnInit {
     "sessionTitle": "management",
     "type": "mentor"
   }
-  segmentType = "mentor";
+  segmentType;
   sessions;
+  pageConfig;
+  searchString;
 
   constructor(
-    private headerService: AppHeaderService,
     private commonService: CommonService,
     private loader: LoaderService,
     private router: Router
-  ) { }
+  ) { 
+    this.pageConfig = this.router.getCurrentNavigation().extras.state;
+    this.payload.sessionTitle = this.pageConfig.searchString;
+    console.log(this.pageConfig)
+  }
 
-  ngOnInit(): void { }
+  onSearch(e) {
+    this.searchString = e.detail.value;
+    this.payload.sessionTitle = this.searchString;
+    if(this.segmentType === 'mentor'){
+      this.getMentors();
+    } else {
+      this.getSessions();
+    }
+  }
+
+  ngOnInit(): void {
+
+    // this.getMentors()
+   }
+
 
   segmentChanged(event) {
     this.segmentType = event.detail.value;
@@ -38,8 +57,9 @@ export class MentoringHomeComponent implements OnInit {
     }
   }
 
-  async ionViewWillEnter() {
-    this.getMentors()
+   ionViewWillEnter() {
+    this.searchString = this.pageConfig.searchString;
+    this.segmentType = "mentor";
   }
 
   getMentors() {
@@ -52,6 +72,9 @@ export class MentoringHomeComponent implements OnInit {
           item.mentor.imageUrl = faker.image.people(500, 500, true)
         }
         this.mentors = res.data.mentors
+      }, error => {
+        this.loader.stopLoader();
+
       })
   }
 
@@ -63,6 +86,8 @@ export class MentoringHomeComponent implements OnInit {
         this.loader.stopLoader();
         this.sessions = res?.data?.sessions;
         console.log(res)
+      }, error => {
+        this.loader.stopLoader();
       })
   }
 
