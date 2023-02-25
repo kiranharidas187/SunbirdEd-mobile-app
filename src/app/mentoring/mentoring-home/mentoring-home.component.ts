@@ -29,6 +29,11 @@ export class MentoringHomeComponent implements OnInit {
 
   segmentChanged(event) {
     this.segmentType = event.detail.value;
+    if(this.segmentType === 'mentor'){
+      this.getMentors();
+    } else {
+      this.getSessions();
+    }
   }
 
   async ionViewWillEnter() {
