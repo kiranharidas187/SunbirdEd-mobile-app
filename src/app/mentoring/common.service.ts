@@ -59,14 +59,14 @@ export class CommonService {
     return this.http.post(`${this.baseUrl}/dsep/init`, payload)
   }
 
-  checkForLogin(initPayload) {
+  checkForLogin(initPayload?) {
     this.initPayload = initPayload;
     const mentorUSerDetails = localStorage.getItem('mentorAppUser');
     console.log(mentorUSerDetails)
     if (!mentorUSerDetails) {
       this.openLoginModal();
     } else {
-      this.router.navigate([`mentoring/confirm-session/${this.initPayload.itemId}/${this.initPayload.fulfillmentId}`], { queryParams: { type: this.initPayload.type } });
+      this.navigateToConfirmPage();
     }
   }
 
@@ -96,6 +96,9 @@ export class CommonService {
 
     await alert.present();
   }
+  navigateToConfirmPage() {
+    this.initPayload ? this.router.navigate([`mentoring/confirm-session/${this.initPayload.itemId}/${this.initPayload.fulfillmentId}`], { queryParams: { type: this.initPayload.type } }) : this.toast.openToast("Please continue booking.");
+  }
 
   action(data) {
     let payload = {
@@ -105,7 +108,7 @@ export class CommonService {
     this.login(payload).subscribe(success => {
       if (success.status) {
         localStorage.setItem('mentorAppUser', JSON.stringify(success.data));
-        this.router.navigate([`mentoring/confirm-session/${this.initPayload.itemId}/${this.initPayload.fulfillmentId}`], { queryParams: { type: this.initPayload.type } });
+        this.navigateToConfirmPage();
       } else {
         this.signup(payload);
       }
@@ -130,7 +133,7 @@ export class CommonService {
   addProfile(name) {
     this.addProfileApi(name).subscribe(res => {
       if (res.status) {
-        this.router.navigate([`mentoring/confirm-session/${this.initPayload.itemId}/${this.initPayload.fulfillmentId}`]);
+        this.navigateToConfirmPage();
       } else {
         this.toast.showMessage(res.message, 'danger');
       }
@@ -162,7 +165,7 @@ export class CommonService {
 
   getMyBookings(): Observable<any> {
     const userToken = JSON.parse(localStorage.getItem('mentorAppUser'));
-    if(userToken){
+    if (userToken) {
       return this.http.get(`${this.baseUrl}/get-confirmed-list`, {
         headers: {
           'Authorization': `Bearer ${userToken.accessToken}`
@@ -179,7 +182,7 @@ export class CommonService {
       id: id,
       title: title,
       text: content,
-      trigger: { at: this.subtractMinutes(time, minutesBefore) }
+      trigger: { at: new Date() }
     })
   }
 
@@ -197,7 +200,7 @@ export class CommonService {
     return null
   }
 
-  openLink(link:string) {
+  openLink(link: string) {
     (window as any).cordova.InAppBrowser.open(link, '_blank');
   }
 }
