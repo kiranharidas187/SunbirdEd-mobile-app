@@ -24,27 +24,33 @@
         </div>
         <div class="last-row">
           <div> {{'FRMELEMNTS_LBL_END_DATE' | translate}} : {{(task?.endDate) ? (task.endDate | date : 'dd/MM/yyyy') : "__"}}</div>
-          <div class="viewBtn">
-            <ion-label class="link-label" *ngIf="task?.type =='simple'"
-              (click)="$event.stopPropagation();onCardClick(task)">
-              {{'FRMELEMNTS_BTN_VIEW_TASK_DETAILS' | translate}}<ion-icon name="chevron-forward"></ion-icon>
-            </ion-label>
-            <ion-button size="small" class="action-btn custom-btn-txt-transform-none" *ngIf="task?.type=='content'&&task?.learningResources?.length"
-              (click)="$event.stopPropagation();openResources(task)">
-              {{'FRMELEMNTS_LBL_VIEW_RESOURCES' | translate}}
-            </ion-button>
-            <ion-button size="small" class="action-btn custom-btn-txt-transform-none"
-              *ngIf="(task?.type=='assessment' || task?.type=='observation')&&task?.status!='completed' "
-              (click)="$event.stopPropagation();onObservatonActionButtonClick(task, i)">
-              {{'START' | translate}} {{task?.type | lowercase }}
-            </ion-button>
-            <ion-button size="small" class="action-btn custom-btn-txt-transform-none"
-              *ngIf="(task?.type=='assessment' || task?.type=='observation')&&task?.status=='completed' "
-              (click)="$event.stopPropagation(); onObservatonActionButtonClick(task, i)">
-              {{'FRMELEMNTS_LBL_VIEW_REPORTS' | translate}}
-            </ion-button>
-          </div>
         </div>
+  <div class="viewBtn flex-end-btn">
+          <ion-button size="small" class="action-btn custom-btn-txt-transform-none"
+            (click)="$event.stopPropagation();seekMentorship(task)">
+            {{'FRMELEMNTS_LBL_SEEK_MENTORSHIP' | translate}}
+          </ion-button>
+          <ion-button size="small" class="action-btn custom-btn-txt-transform-none" *ngIf="task?.type=='content'&&task?.learningResources?.length"
+            (click)="$event.stopPropagation();openResources(task)">
+            {{'FRMELEMNTS_LBL_VIEW_RESOURCES' | translate}}
+          </ion-button>
+          <ion-button size="small" class="action-btn custom-btn-txt-transform-none"
+            *ngIf="(task?.type=='assessment' || task?.type=='observation')&&task?.status!='completed' "
+            (click)="$event.stopPropagation();onObservatonActionButtonClick(task, i)">
+            {{'START' | translate}} {{task?.type | lowercase }}
+          </ion-button>
+          <ion-button size="small" class="action-btn custom-btn-txt-transform-none"
+            *ngIf="(task?.type=='assessment' || task?.type=='observation')&&task?.status=='completed' "
+            (click)="$event.stopPropagation(); onObservatonActionButtonClick(task, i)">
+            {{'FRMELEMNTS_LBL_VIEW_REPORTS' | translate}}
+          </ion-button>
+        </div>
+       <div class="viewBtn flex-end-btn">
+        <ion-label class="link-label" *ngIf="task?.type =='simple'"
+        (click)="$event.stopPropagation();onCardClick(task)">
+        {{'FRMELEMNTS_BTN_VIEW_TASK_DETAILS' | translate}}<ion-icon name="chevron-forward"></ion-icon>
+      </ion-label>
+         </div>
       </ion-col>
     </ion-row>
   </ion-card>

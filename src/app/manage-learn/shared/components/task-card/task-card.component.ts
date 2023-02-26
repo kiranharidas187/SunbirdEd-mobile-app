@@ -159,4 +159,8 @@ export class TaskCardComponent implements OnInit {
     this.showLoadMore = false;
   }
 
+  seekMentorship(task){
+    this.router.navigate([RouterLinks.MENTORING], {state: {searchString: task.name,
+      meta: ''}})
+  }
 }
