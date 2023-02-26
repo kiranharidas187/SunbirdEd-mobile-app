@@ -13,11 +13,22 @@
     </div>
   </div>
 
+<ng-container *ngIf="mentorList?.length">
   <sb-course-cards-hlist [title]="'Recommended Mentors'" [type]="courseCardType.MY_COURSE_RECENTLY_VIEWED_CARD_GRID"
     [contentList]="mentorList" [maxCardCount]="100"
     [hideProgress]="true"
     (cardClick)="navigateToMentorDetails($event)">
   </sb-course-cards-hlist>
+</ng-container>
+
+<ng-container *ngIf="sessionList?.length">
+  <sb-course-cards-hlist [title]="'Recommended Sessions'" [type]="courseCardType.MY_COURSE_RECENTLY_VIEWED_CARD_GRID"
+  [contentList]="sessionList" [maxCardCount]="100"
+  [hideProgress]="true"
+  (cardClick)="navigateToMentorDetails($event)">
+</sb-course-cards-hlist>
+</ng-container>
+
 
   <ng-container *ngFor="let section of displaySections">
     <div class="label"

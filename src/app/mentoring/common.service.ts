@@ -107,7 +107,7 @@ export class CommonService {
   action(data) {
     let payload = {
       "email": data,
-      "password": "testpassword"
+      "password": "password"
     }
     this.login(payload).subscribe(success => {
       if (success.status) {
@@ -207,5 +207,16 @@ export class CommonService {
 
   openLink(link: string) {
     (window as any).cordova.InAppBrowser.open(link, '_blank');
+  }
+
+  getRecommendedData(payload) {
+    const userToken = JSON.parse(localStorage.getItem('mentorAppUser'));
+    if (userToken) {
+      return this.http.post(`${this.baseUrl}/get-recommendations`, payload,{
+        headers: {
+          'Authorization': `Bearer ${userToken.accessToken}`
+        }
+      })
+    }
   }
 }

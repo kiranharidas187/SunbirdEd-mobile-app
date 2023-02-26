@@ -17,10 +17,11 @@ export class MentoringHomeComponent implements OnInit {
     "sessionTitle": "management",
     "type": "mentor"
   }
-  segmentType;
+  segmentType = "mentor";
   sessions;
   pageConfig;
   searchString;
+  
 
   constructor(
     private commonService: CommonService,
@@ -43,8 +44,8 @@ export class MentoringHomeComponent implements OnInit {
 
   ngOnInit(): void {
     // this.getMentors()
-    this.searchString = this.pageConfig.searchString;
-    this.segmentType = "mentor";
+    // this.searchString = this.pageConfig.searchString;
+    // this.segmentType = "mentor";
    }
 
 
@@ -58,7 +59,7 @@ export class MentoringHomeComponent implements OnInit {
   }
 
    ionViewWillEnter() {
-
+    this.searchString = this.pageConfig.searchString;
   }
 
   getMentors() {
