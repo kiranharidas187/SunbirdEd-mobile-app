@@ -187,13 +187,13 @@ export class CommonService {
       id: (Math.random()*100000),
       title: title,
       text: content,
-      trigger: { at: new Date() }
+      trigger: { at:this.subtractMinutes(time,minutesBefore) }
     })
   }
 
   subtractMinutes(date, minutes) {
-    date = new Date(date)
-    date.setMinutes(date.getMinutes() - minutes);
+    date = new Date()
+    date.setMinutes(date.getMinutes() + minutes);
     return date;
   }
 
