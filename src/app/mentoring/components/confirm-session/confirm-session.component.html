@@ -1,7 +1,7 @@
 
-<ion-card>
+<ion-card *ngIf="sessionDetails">
     <ion-content>
-        <div class="flex-container">
+        <div class="flex-container" >
             <h1>Confirm your booking for {{type === 'session' ? 'Session' : 'Mentor'}} </h1>
             <div style="text-align: center;" *ngIf="type === 'session'"><b>{{sessionDetails?.item?.title }}</b></div>
             <div style="text-align: center;" *ngIf="type !== 'session'"><b>{{sessionDetails?.mentor?.name }}</b></div>
@@ -15,7 +15,7 @@
         </div>
     </ion-content>
 </ion-card>
-<ion-footer [translucent]="true">
+<ion-footer [translucent]="true" *ngIf="sessionDetails">
     <ion-toolbar class="tool-bar-bottom">
       <ion-title><ion-button (click)="confirmBooking()" style="width: 100%;">Confirm Booking</ion-button></ion-title>
     </ion-toolbar>

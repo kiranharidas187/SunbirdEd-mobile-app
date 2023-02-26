@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router, RouterState } from '@angular/router';
-import { UtilsService } from '@app/app/manage-learn/core';
+import { ToastService, UtilsService } from '@app/app/manage-learn/core';
 import { CommonService } from '@app/app/mentoring/common.service';
 import { AppHeaderService } from '@app/services';
 import * as moment from 'moment';
@@ -18,13 +18,18 @@ export class MentorDetailsComponent {
   constructor(private commonService: CommonService,
     private utilsService: UtilsService,
     private router: Router,
-    private headerServ: AppHeaderService
+    private headerServ: AppHeaderService,
+    private toast: ToastService
   ) {
     this.mentor = history.state.mentor;
     this.headerServ.showHeaderWithBackButton();
   }
 
   changeSelection(slot: any) {
+    if(this.commonService.getSessionJoinLink(slot.item.id)){
+      this.toast.showMessage("You have already booked this slot.", "danger")
+      return null
+    }
     this.selectedSlot = slot;
     this.mentor.slots.forEach((item: any) => {
       if (slot.item.id === item.item.id) {

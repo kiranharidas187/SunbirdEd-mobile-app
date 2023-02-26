@@ -40,6 +40,7 @@ import { UnnatiDataService } from '@app/app/manage-learn/core/services/unnati-da
 import { OnTabViewWillEnter } from '@app/app/tabs/on-tab-view-will-enter';
 import { FieldConfig } from '@app/app/components/common-forms/field-config';
 import { FormConstants } from '@app/app/form.constants';
+import { CommonService } from '@app/app/mentoring/common.service';
 
 @Component({
   selector: 'app-admin-home',
@@ -677,10 +678,12 @@ export class AdminHomePage implements OnInit, OnDestroy, OnTabViewWillEnter {
     private qrScanner: SunbirdQRScanner,
     private storage: LocalStorageService,
     private unnatiService: UnnatiDataService,
-    private db: DbService
+    private db: DbService,
+    private common: CommonService
   ) { }
 
   ngOnInit() {
+    this.common.getMyBookings().subscribe();
     this.formatMentorList();
     this.getUserProfileDetails();
     this.events.subscribe(AppGlobalService.PROFILE_OBJ_CHANGED, () => {
