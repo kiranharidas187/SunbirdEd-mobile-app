@@ -51,7 +51,7 @@ export class ConfirmSessionComponent implements OnInit {
     }
     this.common.confirmCall(payload).subscribe((res:any) => {
       this.toast.showMessage("Your booking confirmed");
-      this.common.scheduleNotification('Session reminder','Your session will start in 10 mins',res.data.details.fulfillment.startTime,10)
+      this.common.scheduleNotification('Session reminder','Your session will start in 10 mins',res.data.details.fulfillment.startTime,10,res.data.details.fulfillment.id)
       this.location.back();
     }, error => {
       this.location.back();
