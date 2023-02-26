@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router, RouterState } from '@angular/router';
 import { UtilsService } from '@app/app/manage-learn/core';
 import { CommonService } from '@app/app/mentoring/common.service';
+import { AppHeaderService } from '@app/services';
 
 @Component({
   selector: 'app-mentor-details',
@@ -15,9 +16,11 @@ export class MentorDetailsComponent {
   selectedSlot
   constructor(private commonService: CommonService,
     private utilsService: UtilsService,
-    private router: Router
+    private router: Router,
+    private headerServ: AppHeaderService
   ) {
     this.mentor = history.state.mentor;
+    this.headerServ.showHeaderWithBackButton();
   }
 
   changeSelection(slot: any) {
