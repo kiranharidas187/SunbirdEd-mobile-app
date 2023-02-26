@@ -167,7 +167,7 @@ export class CommonService {
 
   scheduleNotification(title:string,content:string,time:string,minutesBefore:number,id:any) {
     this.localNotification.schedule({
-        id:1,
+        id:id,
         title:title,
         text:content,
         trigger: { at: this.subtractMinutes(time,minutesBefore)}
