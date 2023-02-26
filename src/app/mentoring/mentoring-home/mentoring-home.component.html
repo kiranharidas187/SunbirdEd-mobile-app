@@ -1,4 +1,5 @@
 <ion-content>
+  <h2 style="padding: 10px">Search result for "{{searchString}}"</h2>
   <ion-searchbar debounce="1000" placeholder="Search your projects here" [value]="searchString"
   (ionChange)="onSearch($event)" search-icon="search" class="search-bar">
 </ion-searchbar>

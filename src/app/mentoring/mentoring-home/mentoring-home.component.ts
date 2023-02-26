@@ -43,6 +43,8 @@ export class MentoringHomeComponent implements OnInit {
 
   ngOnInit(): void {
     // this.getMentors()
+    this.searchString = this.pageConfig.searchString;
+    this.segmentType = "mentor";
    }
 
 
@@ -56,8 +58,7 @@ export class MentoringHomeComponent implements OnInit {
   }
 
    ionViewWillEnter() {
-    this.searchString = this.pageConfig.searchString;
-    this.segmentType = "mentor";
+
   }
 
   getMentors() {

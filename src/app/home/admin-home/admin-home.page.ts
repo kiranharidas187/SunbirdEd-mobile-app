@@ -41,6 +41,7 @@ import { OnTabViewWillEnter } from '@app/app/tabs/on-tab-view-will-enter';
 import { FieldConfig } from '@app/app/components/common-forms/field-config';
 import { FormConstants } from '@app/app/form.constants';
 import { CommonService } from '@app/app/mentoring/common.service';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-admin-home',
@@ -683,7 +684,9 @@ export class AdminHomePage implements OnInit, OnDestroy, OnTabViewWillEnter {
   ) { }
 
   ngOnInit() {
-    this.common.getMyBookings().subscribe();
+    try{
+      this.common.getMyBookings().subscribe();
+    }catch(e) {}
     this.formatMentorList();
     this.getUserProfileDetails();
     this.events.subscribe(AppGlobalService.PROFILE_OBJ_CHANGED, () => {
@@ -727,7 +730,7 @@ export class AdminHomePage implements OnInit, OnDestroy, OnTabViewWillEnter {
     }
   }
 
-  navigateToMentorDetails(event, name?) {
+  navigateToMentorDetails(event) {
     const index = event.data.index;
     this.unformatedMentorList[index].mentor['imageUrl'] = event.data.cardImg;
     this.router.navigate(['/mentoring/mentor-details'],{state:{mentor:this.unformatedMentorList[event.data.index]}})

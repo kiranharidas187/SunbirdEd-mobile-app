@@ -25,7 +25,22 @@ export class MentorDetailsComponent {
     this.headerServ.showHeaderWithBackButton();
   }
 
+  ionViewWillEnter() {
+    this.selectedSlot = null;
+  }
+
   changeSelection(slot: any) {
+    const userToken = JSON.parse(localStorage.getItem('mentorAppUser'));
+    if(!userToken) {
+      const payload = {
+        itemId: slot.item.id,
+        fulfillmentId: slot.fulfillment.id,
+        type: 'mentor'
+      }
+      this.commonService.checkForLogin();
+      return
+    }
+
     if(this.commonService.getSessionJoinLink(slot.item.id)){
       this.toast.showMessage("You have already booked this slot.", "danger")
       return null
