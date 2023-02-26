@@ -36,8 +36,12 @@ export class SessionDetailsComponent implements OnInit {
   }
 
   getSessionDetails() {
+    this.loader.startLoader();
     this.common.selectItem(this.sessionId).subscribe(result => {
+      this.loader.stopLoader();
       this.sessionDetails = result['data'];
+    },error =>{
+      this.loader.stopLoader();
     })
   }
 
