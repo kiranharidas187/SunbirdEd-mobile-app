@@ -12,7 +12,7 @@ import { CommonService } from '@app/app/mentoring/common.service';
 export class MentorDetailsComponent {
 
   mentor: any;
-  selectedSlot;
+  selectedSlot
   constructor(private commonService: CommonService,
     private utilsService: UtilsService,
     private router: Router

@@ -155,12 +155,27 @@ export class CommonService {
       }
     })
   }
-  scheduleNotification(title:string,content:string,time:string) {
+
+  getMyBookings(): Observable<any> {
+    const userToken = JSON.parse(localStorage.getItem('mentorAppUser'));
+    return this.http.get(`${this.baseUrl}/get-confirmed-list`, {
+      headers: {
+        'Authorization': `Bearer ${userToken.accessToken}`
+      }
+    })
+  }
+
+  scheduleNotification(title:string,content:string,time:string,minutesBefore:number) {
     this.localNotification.schedule({
         id:1,
         title:title,
         text:content,
-        trigger: { at: new Date(time) }
+        trigger: { at: this.subtractMinutes(time,minutesBefore)}
     })
+  }
+
+  subtractMinutes(date, minutes) {
+    date.setMinutes(date.getMinutes() - minutes);
+    return date;
   }
 }
