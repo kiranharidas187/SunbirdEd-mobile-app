@@ -724,7 +724,7 @@ export class AdminHomePage implements OnInit, OnDestroy, OnTabViewWillEnter {
     }
   }
 
-  navigateToMentorDetails(event, name) {
+  navigateToMentorDetails(event, name?) {
     const index = event.data.index;
     this.unformatedMentorList[index].mentor['imageUrl'] = event.data.cardImg;
     this.router.navigate(['/mentoring/mentor-details'],{state:{mentor:this.unformatedMentorList[event.data.index]}})
