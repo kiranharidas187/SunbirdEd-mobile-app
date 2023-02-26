@@ -14,7 +14,8 @@ export class SessionDetailsComponent implements OnInit {
 
   sessionId;
   sessionDetails;
-  mentorName =  faker.image.avatar()
+  mentorName =  faker.image.avatar();
+  sessionJoinLink;
 
 
   constructor( 
@@ -26,7 +27,9 @@ export class SessionDetailsComponent implements OnInit {
     })
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.sessionJoinLink = this.common.getSessionJoinLink(this.sessionId);
+  }
 
   async ionViewWillEnter() {
     this.getSessionDetails()
@@ -47,6 +50,10 @@ export class SessionDetailsComponent implements OnInit {
     }
     this.common.checkForLogin(payload);
 
+  }
+
+  joinCall() {
+    this.common.openLink(this.sessionJoinLink);
   }
 
 }

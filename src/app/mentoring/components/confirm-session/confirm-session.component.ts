@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ToastService } from '@app/app/manage-learn/core';
+import { LoaderService, ToastService } from '@app/app/manage-learn/core';
 import { CommonService } from '../../common.service';
 
 @Component({
@@ -19,7 +19,8 @@ export class ConfirmSessionComponent implements OnInit {
   constructor(private common: CommonService,
     private route: ActivatedRoute,
     private location: Location,
-    private toast: ToastService
+    private toast: ToastService,
+    private loader: LoaderService
   ) {
     this.route.queryParams.subscribe((params) => {
       this.type = params['type']
@@ -34,12 +35,16 @@ export class ConfirmSessionComponent implements OnInit {
   ngOnInit() { }
 
   initCall() {
+    this.loader.startLoader();
     const payload = {
       itemId: this.itemId,
       fulfillmentId: this.fulfillmentId
     }
     this.common.initCall(payload).subscribe(response => {
-      this.sessionDetails = response['data']
+      this.sessionDetails = response['data'];
+      this.loader.stopLoader();
+    }, error => {
+      this.loader.stopLoader();
     })
   }
 
@@ -49,13 +54,16 @@ export class ConfirmSessionComponent implements OnInit {
       "fulfillmentId": this.fulfillmentId,
       "type": this.type
     }
+    this.loader.startLoader();
     this.common.confirmCall(payload).subscribe((res:any) => {
       this.toast.showMessage("Your booking confirmed");
       this.common.scheduleNotification('Session reminder','Your session will start in 10 mins',res.data.details.fulfillment.startTime,10,res.data.details.fulfillment.id)
       this.location.back();
+      this.loader.stopLoader();
     }, error => {
       this.location.back();
       this.toast.showMessage("Your booking failed", 'danger');
+      this.loader.stopLoader();
     })
   }
 

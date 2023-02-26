@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppHeaderService } from '@app/services';
 import { CommonService } from '../../common.service';
 
 
@@ -12,10 +13,11 @@ export class EnrollmentSessionsComponent implements OnInit {
   mentor:any;
   bookings:any = []
   segmentType = "mentor";
-  constructor(private common:CommonService) { }
+  constructor(private common:CommonService, private headerServ: AppHeaderService) { }
 
   ngOnInit() {
     this.mentor = history.state.mentor;
+    this.headerServ.showHeaderWithBackButton();
     this.common.getMyBookings().
     subscribe((res) => {
         this.bookings = res.data;

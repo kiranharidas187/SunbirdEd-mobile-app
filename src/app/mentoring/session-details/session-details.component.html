@@ -9,7 +9,8 @@
       <img [src]="sessionDetails?.item?.image" class="session-image" />
       <span class="type">{{sessionDetails?.fulfillment?.type}}</span>
     </div>
-    <ion-button class="rsvp" (click)="rsvpSessionClick()">RSVP for this session</ion-button>
+    <ion-button class="rsvp" (click)="rsvpSessionClick()" *ngIf="!sessionJoinLink">RSVP for this session</ion-button>
+    <ion-button class="join-button" (click)="joinCall()" *ngIf="sessionJoinLink">Click to join the session</ion-button>
     <p>
       {{sessionDetails?.item?.description}}
     </p>

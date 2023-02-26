@@ -29,7 +29,6 @@ export class MentoringHomeComponent implements OnInit {
   ) { 
     this.pageConfig = this.router.getCurrentNavigation().extras.state;
     this.payload.sessionTitle = this.pageConfig.searchString;
-    console.log(this.pageConfig)
   }
 
   onSearch(e) {
@@ -43,7 +42,6 @@ export class MentoringHomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     // this.getMentors()
    }
 

@@ -5,6 +5,7 @@ import { AlertController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { ToastService } from '../manage-learn/core';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +16,12 @@ export class CommonService {
     private http: HttpClient,
     private router: Router,
     private toast: ToastService,
-    private localNotification:LocalNotifications,
+    private localNotification: LocalNotifications,
     private alertCtrl: AlertController) { }
 
   baseUrl = "https://dev.elevate-apis.shikshalokam.org/osl-bap";
   initPayload;
+  enrolledSessions = [];
 
   searchApi(payload: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/dsep/search`, payload)
@@ -137,7 +139,7 @@ export class CommonService {
   }
 
   initCall(payload) {
-    
+
     const userToken = JSON.parse(localStorage.getItem('mentorAppUser'));
     return this.http.post(`${this.baseUrl}/dsep/init`, payload, {
       headers: {
@@ -147,35 +149,55 @@ export class CommonService {
   }
 
   confirmCall(payload) {
- 
     const userToken = JSON.parse(localStorage.getItem('mentorAppUser'));
     return this.http.post(`${this.baseUrl}/dsep/confirm`, payload, {
       headers: {
         'Authorization': `Bearer ${userToken.accessToken}`
       }
-    })
+    }).pipe(map(data => {
+      this.getMyBookings();
+      return data
+    }))
   }
 
   getMyBookings(): Observable<any> {
     const userToken = JSON.parse(localStorage.getItem('mentorAppUser'));
-    return this.http.get(`${this.baseUrl}/get-confirmed-list`, {
-      headers: {
-        'Authorization': `Bearer ${userToken.accessToken}`
-      }
-    })
+    if(userToken){
+      return this.http.get(`${this.baseUrl}/get-confirmed-list`, {
+        headers: {
+          'Authorization': `Bearer ${userToken.accessToken}`
+        }
+      }).pipe(map(data => {
+        this.enrolledSessions = data['data'] ? data['data'] : [];
+        return data
+      }))
+    }
   }
 
-  scheduleNotification(title:string,content:string,time:string,minutesBefore:number,id:any) {
+  scheduleNotification(title: string, content: string, time: string, minutesBefore: number, id: any) {
     this.localNotification.schedule({
-        id:id,
-        title:title,
-        text:content,
-        trigger: { at: this.subtractMinutes(time,minutesBefore)}
+      id: id,
+      title: title,
+      text: content,
+      trigger: { at: this.subtractMinutes(time, minutesBefore) }
     })
   }
 
   subtractMinutes(date, minutes) {
     date.setMinutes(date.getMinutes() - minutes);
     return date;
+  }
+
+  getSessionJoinLink(id) {
+    for (const session of this.enrolledSessions) {
+      if (id === session?.details?.item?.id) {
+        return session?.joinLink
+      }
+    }
+    return null
+  }
+
+  openLink(link:string) {
+    (window as any).cordova.InAppBrowser.open(link, '_blank');
   }
 }

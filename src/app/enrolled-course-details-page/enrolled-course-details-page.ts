@@ -244,7 +244,7 @@ export class EnrolledCourseDetailsPage implements OnInit, OnDestroy, ConsentPopo
   private batchRemaningTimingIntervalRef?: any;
   isMinor: boolean;
   activityData: ActivityData;
-  showCertificateDetails= false;
+  showCertificateDetails = false;
   certificateDetails: any;
   isCourseMentor = false;
   profile?: Profile;
@@ -310,7 +310,7 @@ export class EnrolledCourseDetailsPage implements OnInit, OnDestroy, ConsentPopo
     }
   }
 
-  async refreshCourseDetails(data){
+  async refreshCourseDetails(data) {
     // For Deeplink scenario on same page
     this.ionViewWillLeave();
     this.ngOnDestroy();
@@ -349,7 +349,7 @@ export class EnrolledCourseDetailsPage implements OnInit, OnDestroy, ConsentPopo
     this.contentDeleteHandler.showContentDeletePopup(this.content, this.isChild, contentInfo, this.pageId);
   }
 
-  subscribeUtilityEvents() {   
+  subscribeUtilityEvents() {
     this.utilityService.getBuildConfigValue('BASE_URL')
       .then(response => {
         this.baseUrl = response;
@@ -457,8 +457,8 @@ export class EnrolledCourseDetailsPage implements OnInit, OnDestroy, ConsentPopo
   }
 
   subscribeTrackDownloads() {
-      this.trackDownloads$ = this.downloadService.trackDownloads({ groupBy: { fieldPath: 'rollUp.l1', value: this.identifier } }).pipe(
-        share());
+    this.trackDownloads$ = this.downloadService.trackDownloads({ groupBy: { fieldPath: 'rollUp.l1', value: this.identifier } }).pipe(
+      share());
   }
 
   checkCurrentUserType() {
@@ -583,12 +583,12 @@ export class EnrolledCourseDetailsPage implements OnInit, OnDestroy, ConsentPopo
     }
   }
 
-  async  syncProgress() {
+  async syncProgress() {
     const loader = await this.commonUtilService.getLoader();
     this.generateLogEvent(InteractSubtype.SYNC_PROGRESS_INITIATE);
     await loader.present();
     this.courseService.syncCourseProgress({
-      courseId:  this.identifier,
+      courseId: this.identifier,
       userId: this.userId,
       batchId: this.batchDetails.id
     }).toPromise()
@@ -670,15 +670,15 @@ export class EnrolledCourseDetailsPage implements OnInit, OnDestroy, ConsentPopo
               undefined,
               this.objRollup,
               this.corRelationList);
-              this.telemetryGeneratorService.generateInteractTelemetry(
-                InteractType.OTHER,
-                InteractSubtype.UNENROL_SUCCESS,
-                Environment.HOME,
-                this.pageId,
-                this.telemetryObject,
-                undefined,
-                this.objRollup,
-                this.corRelationList);
+            this.telemetryGeneratorService.generateInteractTelemetry(
+              InteractType.OTHER,
+              InteractSubtype.UNENROL_SUCCESS,
+              Environment.HOME,
+              this.pageId,
+              this.telemetryObject,
+              undefined,
+              this.objRollup,
+              this.corRelationList);
           });
         }, (error) => {
           this.zone.run(async () => {
@@ -692,15 +692,15 @@ export class EnrolledCourseDetailsPage implements OnInit, OnDestroy, ConsentPopo
               undefined,
               this.objRollup,
               this.corRelationList);
-              this.telemetryGeneratorService.generateInteractTelemetry(
-                InteractType.OTHER,
-                InteractSubtype.UNENROL_FAILURE,
-                Environment.HOME,
-                this.pageId,
-                this.telemetryObject,
-                undefined,
-                this.objRollup,
-                this.corRelationList);
+            this.telemetryGeneratorService.generateInteractTelemetry(
+              InteractType.OTHER,
+              InteractSubtype.UNENROL_FAILURE,
+              Environment.HOME,
+              this.pageId,
+              this.telemetryObject,
+              undefined,
+              this.objRollup,
+              this.corRelationList);
             if (error && error.error === 'CONNECTION_ERROR') {
               this.commonUtilService.showToast(this.commonUtilService.translateMessage('ERROR_NO_INTERNET_MESSAGE'));
             } else {
@@ -888,7 +888,7 @@ export class EnrolledCourseDetailsPage implements OnInit, OnDestroy, ConsentPopo
           this.batchDetails = data;
           this.showCertificateDetails = this.batchDetails.cert_templates ? true : false;
           for (var key in this.batchDetails.cert_templates) {
-            this.certificateDetails = this.batchDetails.cert_templates; 
+            this.certificateDetails = this.batchDetails.cert_templates;
             if (this.certificateDetails) {
               this.isCertifiedCourse = true;
               if (this.certificateDetails[key].description) {
@@ -898,7 +898,7 @@ export class EnrolledCourseDetailsPage implements OnInit, OnDestroy, ConsentPopo
               this.isCertifiedCourse = false;
             }
 
-            
+
           }
           if (this.batchRemaningTimingIntervalRef) {
             clearInterval(this.batchRemaningTimingIntervalRef);
@@ -906,7 +906,7 @@ export class EnrolledCourseDetailsPage implements OnInit, OnDestroy, ConsentPopo
           }
           if (this.batchDetails.endDate || this.batchDetails.enrollmentEndDate) {
             this.batchEndDate = this.batchEndDate ? this.batchEndDate : this.batchDetails.endDate || this.batchDetails.enrollmentEndDate;
-            this.batchEndDateStatus( this.batchDetails.endDate || this.batchDetails.enrollmentEndDate);
+            this.batchEndDateStatus(this.batchDetails.endDate || this.batchDetails.enrollmentEndDate);
           }
           this.saveContentContext(this.appGlobalService.getUserId(),
             this.batchDetails.courseId, this.courseCardData.batchId, this.batchDetails.status);
@@ -1237,7 +1237,7 @@ export class EnrolledCourseDetailsPage implements OnInit, OnDestroy, ConsentPopo
         this.handleUnenrollButton();
         this.showOfflineSection = false;
         this.batches = data || [];
-        if(!this.isAlreadyEnrolled && this.batches && this.batches.length){
+        if (!this.isAlreadyEnrolled && this.batches && this.batches.length) {
           const batchDetails = this.batches[0];
           this.showCertificateDetails = batchDetails.cert_templates ? true : false;
           this.certificateDetails = batchDetails.cert_templates ? batchDetails.cert_templates : '';
@@ -1583,7 +1583,7 @@ export class EnrolledCourseDetailsPage implements OnInit, OnDestroy, ConsentPopo
       if (this.localCourseService.isConsentPopupVisible()) {
         this.localCourseService.setConsentPopupVisibility(false);
         await this.popoverCtrl.dismiss();
-       }
+      }
 
       if (await this.onboardingSkippedBackAction()) {
         return;
@@ -1757,50 +1757,50 @@ export class EnrolledCourseDetailsPage implements OnInit, OnDestroy, ConsentPopo
    * checks whether batches are available or not and then Navigate user to batch list page
    */
   async navigateToBatchListPage() {
-    if(this.isCourseMentor) {
+    if (this.isCourseMentor) {
       this.commonUtilService.showToast('Course Mentor cannot join/leave any course');
     }
-    else{
-    const loader = await this.commonUtilService.getLoader();
-    const reqvalues = new Map();
-    reqvalues['enrollReq'] = this.courseBatchesRequest; 
-    this.telemetryGeneratorService.generateInteractTelemetry(InteractType.TOUCH,
-      InteractSubtype.ENROLL_CLICKED, Environment.HOME,
-      PageId.COURSE_DETAIL, this.telemetryObject, reqvalues, this.objRollup);
+    else {
+      const loader = await this.commonUtilService.getLoader();
+      const reqvalues = new Map();
+      reqvalues['enrollReq'] = this.courseBatchesRequest;
+      this.telemetryGeneratorService.generateInteractTelemetry(InteractType.TOUCH,
+        InteractSubtype.ENROLL_CLICKED, Environment.HOME,
+        PageId.COURSE_DETAIL, this.telemetryObject, reqvalues, this.objRollup);
       this.telemetryGeneratorService.generateInteractTelemetry(InteractType.TOUCH,
         InteractSubtype.ENROLL_CLICKED, Environment.HOME,
         this.pageId, this.telemetryObject, reqvalues, this.objRollup);
 
-    if (!this.commonUtilService.networkInfo.isNetworkAvailable) {
-      this.commonUtilService.showToast('ERROR_NO_INTERNET_MESSAGE');
-      return;
-    }
+      if (!this.commonUtilService.networkInfo.isNetworkAvailable) {
+        this.commonUtilService.showToast('ERROR_NO_INTERNET_MESSAGE');
+        return;
+      }
 
-    if (!this.localCourseService.isEnrollable(this.batches, this.course) && !this.isCourseMentor) {
-      return;
-    }
+      if (!this.localCourseService.isEnrollable(this.batches, this.course) && !this.isCourseMentor) {
+        return;
+      }
 
-    const ongoingBatches = [];
-    if (this.batches.length === 1) {
-      this.enrollIntoBatch(this.batches[0], this.course);
-    } else {
-      forEach(this.batches, (batch, key) => {
-        if (batch.status === 1) {
-          ongoingBatches.push(batch);
-        }
-      });
-      this.router.navigate([RouterLinks.COURSE_BATCHES], {
-        state: {
-          ongoingBatches,
-          upcommingBatches: [],
-          course: this.course,
-          objRollup: this.objRollup,
-          telemetryObject: this.telemetryObject,
-          corRelationList: this.corRelationList
-        }
-      });
+      const ongoingBatches = [];
+      if (this.batches.length === 1) {
+        this.enrollIntoBatch(this.batches[0], this.course);
+      } else {
+        forEach(this.batches, (batch, key) => {
+          if (batch.status === 1) {
+            ongoingBatches.push(batch);
+          }
+        });
+        this.router.navigate([RouterLinks.COURSE_BATCHES], {
+          state: {
+            ongoingBatches,
+            upcommingBatches: [],
+            course: this.course,
+            objRollup: this.objRollup,
+            telemetryObject: this.telemetryObject,
+            corRelationList: this.corRelationList
+          }
+        });
+      }
     }
-  }
   }
 
   async share() {
@@ -1858,14 +1858,14 @@ export class EnrolledCourseDetailsPage implements OnInit, OnDestroy, ConsentPopo
       objectVersion,
       this.objRollup,
       this.corRelationList);
-      this.telemetryGeneratorService.generateImpressionTelemetry(ImpressionType.DETAIL,
-        '', this.pageId,
-        Environment.HOME,
-        objectId,
-        objectType,
-        objectVersion,
-        this.objRollup,
-        this.corRelationList);
+    this.telemetryGeneratorService.generateImpressionTelemetry(ImpressionType.DETAIL,
+      '', this.pageId,
+      Environment.HOME,
+      objectId,
+      objectType,
+      objectVersion,
+      this.objRollup,
+      this.corRelationList);
   }
 
   generateStartEvent(objectId, objectType, objectVersion) {
@@ -1891,13 +1891,13 @@ export class EnrolledCourseDetailsPage implements OnInit, OnDestroy, ConsentPopo
       telemetryObject,
       this.objRollup,
       this.corRelationList);
-      this.telemetryGeneratorService.generateEndTelemetry(objectType || CsPrimaryCategory.COURSE,
-        Mode.PLAY,
-        this.pageId,
-        Environment.HOME,
-        telemetryObject,
-        this.objRollup,
-        this.corRelationList);
+    this.telemetryGeneratorService.generateEndTelemetry(objectType || CsPrimaryCategory.COURSE,
+      Mode.PLAY,
+      this.pageId,
+      Environment.HOME,
+      telemetryObject,
+      this.objRollup,
+      this.corRelationList);
   }
 
   /**
@@ -2051,8 +2051,8 @@ export class EnrolledCourseDetailsPage implements OnInit, OnDestroy, ConsentPopo
       case 'back':
         this.telemetryGeneratorService.generateBackClickedTelemetry(PageId.COURSE_DETAIL, Environment.HOME,
           true, this.identifier, this.corRelationList, this.objRollup, this.telemetryObject);
-          this.telemetryGeneratorService.generateBackClickedTelemetry(this.pageId, Environment.HOME,
-            true, this.identifier, this.corRelationList, this.objRollup, this.telemetryObject);
+        this.telemetryGeneratorService.generateBackClickedTelemetry(this.pageId, Environment.HOME,
+          true, this.identifier, this.corRelationList, this.objRollup, this.telemetryObject);
         this.handleNavBackButton();
 
         if (await this.onboardingSkippedBackAction()) {
@@ -2077,11 +2077,11 @@ export class EnrolledCourseDetailsPage implements OnInit, OnDestroy, ConsentPopo
         Environment.HOME,
         PageId.COURSE_BATCHES, undefined,
         this.localCourseService.prepareRequestValue(enrollCourseRequest));
-        this.telemetryGeneratorService.generateInteractTelemetry(InteractType.TOUCH,
-          InteractSubtype.ENROLL_CLICKED,
-          Environment.HOME,
-          this.commonUtilService.appendTypeToPrimaryCategory(this.content, '-batches'), undefined,
-          this.localCourseService.prepareRequestValue(enrollCourseRequest));
+      this.telemetryGeneratorService.generateInteractTelemetry(InteractType.TOUCH,
+        InteractSubtype.ENROLL_CLICKED,
+        Environment.HOME,
+        this.commonUtilService.appendTypeToPrimaryCategory(this.content, '-batches'), undefined,
+        this.localCourseService.prepareRequestValue(enrollCourseRequest));
 
       const enrollCourse: EnrollCourse = {
         userId: this.userId,
@@ -2161,7 +2161,7 @@ export class EnrolledCourseDetailsPage implements OnInit, OnDestroy, ConsentPopo
         this.corRelationList
       );
       this.appGlobalService.resetSavedQuizContent();
-      this.router.navigate([RouterLinks.SIGN_IN], {state: {navigateToCourse: true}});
+      this.router.navigate([RouterLinks.SIGN_IN], { state: { navigateToCourse: true } });
     }
   }
 
@@ -2262,15 +2262,15 @@ export class EnrolledCourseDetailsPage implements OnInit, OnDestroy, ConsentPopo
         undefined,
         this.objRollup,
         this.corRelationList);
-        this.telemetryGeneratorService.generateInteractTelemetry(
-          InteractType.TOUCH,
-          InteractSubtype.TRAINING_MODULE_CLICKED,
-          Environment.HOME,
-          this.pageId,
-          this.telemetryObject,
-          undefined,
-          this.objRollup,
-          this.corRelationList);
+      this.telemetryGeneratorService.generateInteractTelemetry(
+        InteractType.TOUCH,
+        InteractSubtype.TRAINING_MODULE_CLICKED,
+        Environment.HOME,
+        this.pageId,
+        this.telemetryObject,
+        undefined,
+        this.objRollup,
+        this.corRelationList);
       const chapterParams: NavigationExtras = {
         state: {
           chapterData: event.item,
@@ -2500,11 +2500,11 @@ export class EnrolledCourseDetailsPage implements OnInit, OnDestroy, ConsentPopo
               Environment.HOME,
               PageId.COURSE_DETAIL, undefined,
               reqvalues, undefined, this.corRelationList);
-              this.telemetryGeneratorService.generateInteractTelemetry(InteractType.TOUCH,
-                'ongoing-batch-popup',
-                Environment.HOME,
-                this.pageId, undefined,
-                reqvalues, undefined, this.corRelationList);
+            this.telemetryGeneratorService.generateInteractTelemetry(InteractType.TOUCH,
+              'ongoing-batch-popup',
+              Environment.HOME,
+              this.pageId, undefined,
+              reqvalues, undefined, this.corRelationList);
             const popover = await this.popoverCtrl.create({
               component: EnrollmentDetailsComponent,
               componentProps: {
@@ -2563,16 +2563,16 @@ export class EnrolledCourseDetailsPage implements OnInit, OnDestroy, ConsentPopo
     }, 1000 * 60);
   }
 
-  navigateToDashboard(){
+  navigateToDashboard() {
     this.router.navigate([`/${RouterLinks.MY_GROUPS}/${RouterLinks.ACTIVITY_DETAILS}/${RouterLinks.ACTIVITY_DASHBOARD}`],
-    {
-      state: {
-        hierarchyData: this.courseHeirarchy,
-        activity: this.activityData && this.activityData.activity,
-        group: this.activityData && this.activityData.group,
-        loggedinUser: this.userId
-      }
-    });
+      {
+        state: {
+          hierarchyData: this.courseHeirarchy,
+          activity: this.activityData && this.activityData.activity,
+          group: this.activityData && this.activityData.group,
+          loggedinUser: this.userId
+        }
+      });
   }
 
   markContent() {
@@ -2598,9 +2598,15 @@ export class EnrolledCourseDetailsPage implements OnInit, OnDestroy, ConsentPopo
     this.contentService.setContentMarker(contentMarkerRequest).toPromise().then();
   }
 
-  seekMentorship(){
-    this.router.navigate([RouterLinks.MENTORING], {state: {searchString: this.courseCardData.courseName,
-      meta: this.courseCardData.description, enableSearch: true}})
+  seekMentorship() {
+    this.router.navigate([RouterLinks.MENTORING],
+      {
+        state: {
+          searchString: this.courseCardData.name || this.courseCardData.courseName,
+          meta: this.courseCardData.description,
+          enableSearch: true
+        }
+      })
   }
 
 }
