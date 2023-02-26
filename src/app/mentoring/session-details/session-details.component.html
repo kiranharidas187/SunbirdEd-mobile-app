@@ -5,7 +5,7 @@
       <ion-icon name="calendar" class="cal-icon"></ion-icon>
       {{sessionDetails?.fulfillment?.startTime | date :'long'}}
     </p>
-    <div>
+    <div style="position:relative">
       <img [src]="sessionDetails?.item?.image" class="session-image" />
       <span class="type">{{sessionDetails?.fulfillment?.type}}</span>
     </div>

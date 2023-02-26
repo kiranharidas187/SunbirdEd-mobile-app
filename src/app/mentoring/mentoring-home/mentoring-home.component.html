@@ -1,6 +1,10 @@
 <ion-content>
-  <div class="project-segments">
-    <ion-segment [(ngModel)]="segmentType" (ionChange)="segmentChanged($event)" class="segment-card">
+  <ion-searchbar debounce="1000" placeholder="Search your projects here" [value]="searchString"
+  (ionChange)="onSearch($event)" search-icon="search" class="search-bar">
+</ion-searchbar>
+
+  <div class="project-segments" *ngIf="segmentType">
+    <ion-segment [value]="segmentType" (ionChange)="segmentChanged($event)" class="segment-card">
       <ion-segment-button value="mentor" class="flex-5">
         <ion-label class="font-12 text-transform-none">Mentors</ion-label>
       </ion-segment-button>
