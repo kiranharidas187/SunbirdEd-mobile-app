@@ -176,7 +176,7 @@ export class CommonService {
 
   scheduleNotification(title: string, content: string, time: string, minutesBefore: number, id: any) {
     this.localNotification.schedule({
-      id: id,
+      id: (Math.random()*100000),
       title: title,
       text: content,
       trigger: { at: this.subtractMinutes(time, minutesBefore) }
@@ -184,7 +184,10 @@ export class CommonService {
   }
 
   subtractMinutes(date, minutes) {
+    date = new Date(date)
+    console.log("old date",date)
     date.setMinutes(date.getMinutes() - minutes);
+    console.log("new date",date,)
     return date;
   }
 
