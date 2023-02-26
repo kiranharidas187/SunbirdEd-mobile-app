@@ -61,12 +61,16 @@ export class CommonService {
 
   checkForLogin(initPayload?) {
     this.initPayload = initPayload;
-    const mentorUSerDetails = localStorage.getItem('mentorAppUser');
-    console.log(mentorUSerDetails)
+    const mentorUSerDetails : any= JSON.parse(localStorage.getItem('mentorAppUser'));
     if (!mentorUSerDetails) {
       this.openLoginModal();
     } else {
-      this.navigateToConfirmPage();
+      const hourDiff  = (Date.now()-  mentorUSerDetails.loginTime) / 1000 / 60 / 60;
+      if(hourDiff > 20){
+        this.action(mentorUSerDetails.email);
+      }else{
+        this.navigateToConfirmPage();
+      }
     }
   }
 
@@ -107,6 +111,7 @@ export class CommonService {
     }
     this.login(payload).subscribe(success => {
       if (success.status) {
+        success.data.loginTime = Date.now();
         localStorage.setItem('mentorAppUser', JSON.stringify(success.data));
         this.navigateToConfirmPage();
       } else {
