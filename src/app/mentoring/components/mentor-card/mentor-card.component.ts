@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./mentor-card.component.scss'],
 })
 export class MentorCardComponent implements OnInit {
-
+  rating = Math.floor((Math.random() * 5) + 1)
   @Input() cardData: any;
   @Output() cardSelect = new EventEmitter();
   constructor(private router:Router) { }
