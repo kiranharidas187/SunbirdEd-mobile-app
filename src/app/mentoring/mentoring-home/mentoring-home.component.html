@@ -1,6 +1,6 @@
 <ion-content>
   <h2 style="padding: 10px">Search result for "{{searchString}}"</h2>
-  <ion-searchbar debounce="1000" placeholder="Search your projects here" [value]="searchString"
+  <ion-searchbar debounce="1000" placeholder="Search your projects here" [value]="searchString" *ngIf="pageConfig.enableSearch"
   (ionChange)="onSearch($event)" search-icon="search" class="search-bar">
 </ion-searchbar>
 
