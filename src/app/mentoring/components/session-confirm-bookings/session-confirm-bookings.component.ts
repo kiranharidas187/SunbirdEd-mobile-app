@@ -27,8 +27,7 @@ export class EnrollmentSessionsComponent implements OnInit {
   }
 
   openLink(link:string) {
-    console.log(link);
-    // (window as any).cordova.InAppBrowser.open(link, '_blank');
+    (window as any).cordova.InAppBrowser.open(link, '_blank');
   }
 
 }
