@@ -163,7 +163,9 @@ export class CommonService {
         'Authorization': `Bearer ${userToken.accessToken}`
       }
     }).pipe(map(data => {
-      this.getMyBookings();
+      try{
+        this.getMyBookings().subscribe();
+      }catch(e){}
       return data
     }))
   }

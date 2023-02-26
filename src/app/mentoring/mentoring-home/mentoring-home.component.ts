@@ -36,8 +36,10 @@ export class MentoringHomeComponent implements OnInit {
     this.searchString = e.detail.value;
     this.payload.sessionTitle = this.searchString;
     if(this.segmentType === 'mentor'){
+      this.mentors = [];
       this.getMentors();
     } else {
+      this.sessions = [];
       this.getSessions();
     }
   }
@@ -51,9 +53,9 @@ export class MentoringHomeComponent implements OnInit {
 
   segmentChanged(event) {
     this.segmentType = event.detail.value;
-    if(this.segmentType === 'mentor'){
+    if(this.segmentType === 'mentor' && !this.mentors?.length){
       this.getMentors();
-    } else {
+    } else if(this.segmentType === 'sessions' && !this.sessions?.length){
       this.getSessions();
     }
   }
