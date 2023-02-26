@@ -3,13 +3,27 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    line-height: 3rem;
+    line-height: 2rem;
     height: 100%;
 }
+// over ride style
+.need-header-space ion-content:first-child {
+    --offset-top:0;
+}
+ion-card {
+    margin: 2rem;
+    margin-top: 118px;
+    height: 55%;
+}
+ion-toolbar {
+    padding: 0.5rem;
+    border-radius: 0;
+}
+
 b {
     font-size: 18px;
 }
 
 h1 {
-    margin-bottom: 50px;
+    margin-bottom: 25px;
 }

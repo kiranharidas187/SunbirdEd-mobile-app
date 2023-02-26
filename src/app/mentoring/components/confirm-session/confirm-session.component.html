@@ -1,19 +1,22 @@
-<ion-content>
-    <div class="flex-container">
-        <h1>Confirm your booking for session </h1>
-        <div style="text-align: center;"><b>{{sessionDetails?.item?.title }}</b></div>
-        <div>on</div>
-        <div><b>{{sessionDetails?.fulfillment?.startTime | date :'mediumDate'}}</b></div>
-        <div>from </div>
-        <div>
-            <b>{{sessionDetails?.fulfillment?.startTime | date :'shortTime'}}</b> to 
-            <b>{{sessionDetails?.fulfillment?.endTime | date :'shortTime'}}</b>
+
+<ion-card>
+    <ion-content>
+        <div class="flex-container">
+            <h1>Confirm your booking for {{type === 'session' ? 'Session' : 'Mentor'}} </h1>
+            <div style="text-align: center;" *ngIf="type === 'session'"><b>{{sessionDetails?.item?.title }}</b></div>
+            <div style="text-align: center;" *ngIf="type !== 'session'"><b>{{sessionDetails?.mentor?.name }}</b></div>
+            <div>on</div>
+            <div><b>{{sessionDetails?.fulfillment?.startTime | date :'mediumDate'}}</b></div>
+            <div>from </div>
+            <div>
+                <b>{{sessionDetails?.fulfillment?.startTime | date :'shortTime'}}</b> to 
+                <b>{{sessionDetails?.fulfillment?.endTime | date :'shortTime'}}</b>
+            </div>
         </div>
-    </div>
-    
-</ion-content>
+    </ion-content>
+</ion-card>
 <ion-footer [translucent]="true">
     <ion-toolbar class="tool-bar-bottom">
       <ion-title><ion-button (click)="confirmBooking()" style="width: 100%;">Confirm Booking</ion-button></ion-title>
     </ion-toolbar>
-  </ion-footer>
+</ion-footer>

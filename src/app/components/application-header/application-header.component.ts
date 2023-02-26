@@ -593,4 +593,8 @@ export class ApplicationHeaderComponent implements OnInit, OnDestroy {
       this.renderer.removeAttribute(this.resetFontSize.nativeElement, 'disabled');
     }
   }
+
+  gotoBookings() {
+    this.router.navigate(['/mentoring/confirm-booking'])
+  }
 }

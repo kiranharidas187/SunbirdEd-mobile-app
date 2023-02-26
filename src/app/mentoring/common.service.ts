@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { ToastService } from '../manage-learn/core';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class CommonService {
     private http: HttpClient,
     private router: Router,
     private toast: ToastService,
+    private localNotification:LocalNotifications,
     private alertCtrl: AlertController) { }
 
   baseUrl = "https://dev.elevate-apis.shikshalokam.org/osl-bap";
@@ -152,5 +154,28 @@ export class CommonService {
         'Authorization': `Bearer ${userToken.accessToken}`
       }
     })
+  }
+
+  getMyBookings(): Observable<any> {
+    const userToken = JSON.parse(localStorage.getItem('mentorAppUser'));
+    return this.http.get(`${this.baseUrl}/get-confirmed-list`, {
+      headers: {
+        'Authorization': `Bearer ${userToken.accessToken}`
+      }
+    })
+  }
+
+  scheduleNotification(title:string,content:string,time:string,minutesBefore:number,id:any) {
+    this.localNotification.schedule({
+        id:id,
+        title:title,
+        text:content,
+        trigger: { at: this.subtractMinutes(time,minutesBefore)}
+    })
+  }
+
+  subtractMinutes(date, minutes) {
+    date.setMinutes(date.getMinutes() - minutes);
+    return date;
   }
 }

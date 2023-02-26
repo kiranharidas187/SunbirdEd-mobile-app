@@ -8,8 +8,9 @@ import { MentorCardComponent } from './components/mentor-card/mentor-card.compon
 import { ConfirmSessionComponent } from './components/confirm-session/confirm-session.component';
 import { MentorDetailsComponent } from './components/mentor-card/mentor-details/mentor-details.component';
 import { MentorSessionCardComponent } from './components/mentor-card/mentor-session-card/mentor-session-card.component';
-import { SessionConfirmBookingsComponent } from './components/session-confirm-bookings/session-confirm-bookings.component';
+import { EnrollmentSessionsComponent } from './components/session-confirm-bookings/session-confirm-bookings.component';
 import { SessionDetailsComponent } from './session-details/session-details.component';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 const routes: Routes = [
   {
@@ -29,7 +30,7 @@ const routes: Routes = [
   },
   {
     path:"confirm-booking",
-    component:SessionConfirmBookingsComponent
+    component:EnrollmentSessionsComponent
   }
 ]
 
@@ -41,13 +42,16 @@ const routes: Routes = [
     ConfirmSessionComponent, 
     MentorSessionCardComponent,
     SessionDetailsComponent,
-    SessionConfirmBookingsComponent
+    EnrollmentSessionsComponent
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     CommonModule,
     TranslateModule.forChild(),
     IonicModule,
-    RouterModule.forChild(routes)]
+    RouterModule.forChild(routes)],
+  providers:[
+    LocalNotifications
+  ]
 })
 export class MentoringModule { }
