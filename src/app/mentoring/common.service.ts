@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { ToastService } from '../manage-learn/core';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class CommonService {
     private http: HttpClient,
     private router: Router,
     private toast: ToastService,
+    private localNotification:LocalNotifications,
     private alertCtrl: AlertController) { }
 
   baseUrl = "https://dev.elevate-apis.shikshalokam.org/osl-bap"
@@ -127,6 +129,15 @@ export class CommonService {
         this.toast.showMessage(res.message, 'danger');
       }
     }, error => {
+    })
+  }
+
+  scheduleNotification(title:string,content:string,time:string) {
+    this.localNotification.schedule({
+        id:1,
+        title:title,
+        text:content,
+        trigger: { at: new Date(time) }
     })
   }
 }

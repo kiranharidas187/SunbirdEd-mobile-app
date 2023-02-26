@@ -42,7 +42,7 @@
         </ion-row>
       </ion-grid>
     </section>
-    <ion-footer [translucent]="true">
+    <ion-footer [translucent]="true" *ngIf="isAnySlotSelected">
       <ion-toolbar class="tool-bar-bottom">
         <ion-title><ion-button (click)="gotoBooking()">Book Session</ion-button></ion-title>
       </ion-toolbar>

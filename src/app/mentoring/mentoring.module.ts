@@ -10,6 +10,7 @@ import { MentorDetailsComponent } from './components/mentor-card/mentor-details/
 import { MentorSessionCardComponent } from './components/mentor-card/mentor-session-card/mentor-session-card.component';
 import { SessionConfirmBookingsComponent } from './components/session-confirm-bookings/session-confirm-bookings.component';
 import { SessionDetailsComponent } from './session-details/session-details.component';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 const routes: Routes = [
   {
@@ -48,6 +49,9 @@ const routes: Routes = [
     CommonModule,
     TranslateModule.forChild(),
     IonicModule,
-    RouterModule.forChild(routes)]
+    RouterModule.forChild(routes)],
+  providers:[
+    LocalNotifications
+  ]
 })
 export class MentoringModule { }

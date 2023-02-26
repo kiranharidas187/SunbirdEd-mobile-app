@@ -129,9 +129,7 @@ export class SessionConfirmBookingsComponent implements OnInit {
   }
 
   openLink(link:string) {
-    (window as any).cordova.InAppBrowser.open(link, '_blank');
+    (window as any).cordova.InAppBrowser.open('http://google.com', '_blank');
   }
-
-  
 
 }
