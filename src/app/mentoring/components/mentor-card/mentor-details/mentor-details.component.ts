@@ -3,6 +3,7 @@ import { ActivatedRoute, Router, RouterState } from '@angular/router';
 import { UtilsService } from '@app/app/manage-learn/core';
 import { CommonService } from '@app/app/mentoring/common.service';
 import { AppHeaderService } from '@app/services';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-mentor-details',
@@ -13,7 +14,7 @@ import { AppHeaderService } from '@app/services';
 export class MentorDetailsComponent {
 
   mentor: any;
-  selectedSlot
+  selectedSlot;
   constructor(private commonService: CommonService,
     private utilsService: UtilsService,
     private router: Router,
